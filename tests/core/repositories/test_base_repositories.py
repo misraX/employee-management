@@ -4,7 +4,7 @@ from typing import Final
 from unittest import TestCase
 from uuid import UUID
 
-from employee_management.core.repositories.base_repository import Repository, T
+from employee_management.core.repositories.base_repository import CRUDRepository, T
 
 
 class Entity:
@@ -25,7 +25,7 @@ class Entity:
         return self._id
 
 
-class EntityRepository(Repository[Entity]):
+class EntityRepository(CRUDRepository[Entity]):
     def __init__(self):
         self._entities: dict[uuid.UUID, Entity] = {}
 
@@ -78,6 +78,14 @@ class TestCRUDRepository(TestCase):
         self.repository.add(self.entity2)
         entities = self.repository.get_all()
         self.assertEqual(len(entities), 2)
+
+    def test_immutable_entity_attr(self):
+        self.repository.add(self.entity)
+        with self.assertRaises(AttributeError) as attribute_error:
+            self.entity.name = "Modified test"
+        self.assertEqual(
+            attribute_error.exception.__str__(), "Cannot modify the name attribute."
+        )
 
 
 if __name__ == "__main__":
