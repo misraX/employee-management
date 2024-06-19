@@ -22,3 +22,7 @@ class ConfigurationTests(unittest.TestCase):
     def test_configuration_app_name(self):
         os.environ["APP_NAME"] = "Test Application"
         self.assertEqual(self.config.app_name, "Test Application")
+
+
+if __name__ == "__main__":
+    unittest.main()
