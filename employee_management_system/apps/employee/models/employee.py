@@ -1,6 +1,7 @@
 from datetime import datetime
 from typing import Final
 
+from employee_management_system.exceptions.immutable import ImmutableAttributeError
 from employee_management_system.validators.email import EmailValidator
 
 
@@ -34,7 +35,7 @@ class Employee:
 
     @name.setter
     def name(self, name: str):
-        raise AttributeError("Cannot modify the name attribute.")
+        raise ImmutableAttributeError("Cannot modify the name attribute.")
 
     @property
     def salary(self) -> float:
@@ -42,7 +43,7 @@ class Employee:
 
     @salary.setter
     def salary(self, salary: float):
-        raise AttributeError("Cannot modify the salary attribute.")
+        raise ImmutableAttributeError("Cannot modify the salary attribute.")
 
     @property
     def position(self) -> str:
@@ -50,7 +51,7 @@ class Employee:
 
     @position.setter
     def position(self, position: str):
-        raise AttributeError("Cannot modify the position attribute.")
+        raise ImmutableAttributeError("Cannot modify the position attribute.")
 
     @property
     def email(self) -> str:
@@ -58,7 +59,7 @@ class Employee:
 
     @email.setter
     def email(self, email: str):
-        raise AttributeError("Cannot modify the email attribute.")
+        raise ImmutableAttributeError("Cannot modify the email attribute.")
 
     @property
     def created_at(self) -> datetime:
@@ -66,7 +67,7 @@ class Employee:
 
     @created_at.setter
     def created_at(self, created_at: datetime):
-        raise AttributeError("Cannot modify the created_at attribute.")
+        raise ImmutableAttributeError("Cannot modify the created_at attribute.")
 
     @property
     def updated_at(self) -> datetime:
@@ -74,7 +75,7 @@ class Employee:
 
     @updated_at.setter
     def updated_at(self, updated_at: datetime):
-        raise AttributeError("Cannot modify the updated_at attribute.")
+        raise ImmutableAttributeError("Cannot modify the updated_at attribute.")
 
     def __str__(self):
         return (

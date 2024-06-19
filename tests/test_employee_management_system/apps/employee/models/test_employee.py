@@ -5,6 +5,7 @@ from faker import Faker
 
 from employee_management_system.apps.employee.models.employee import Employee
 from employee_management_system.exceptions.email import EmailValidationException
+from employee_management_system.exceptions.immutable import ImmutableAttributeError
 from employee_management_system.utilities.time import TimeUtility
 
 fake = Faker()
@@ -50,36 +51,36 @@ class EmployeeModelTestCase(TestCase):
         )
 
     def test_immutable_employee_name(self):
-        with self.assertRaises(AttributeError) as exception:
+        with self.assertRaises(ImmutableAttributeError) as exception:
             self.employee.name = fake.name()
 
         self.assertEqual(str(exception.exception), "Cannot modify the name attribute.")
 
     def test_immutable_employee_email(self):
-        with self.assertRaises(AttributeError) as exception:
+        with self.assertRaises(ImmutableAttributeError) as exception:
             self.employee.email = fake.email()
 
         self.assertEqual(str(exception.exception), "Cannot modify the email attribute.")
 
     def test_immutable_employee_salary(self):
-        with self.assertRaises(AttributeError) as exception:
+        with self.assertRaises(ImmutableAttributeError) as exception:
             self.employee.salary = fake.pyfloat(min_value=100, max_value=2000)
 
         self.assertEqual(str(exception.exception), "Cannot modify the salary attribute.")
 
     def test_immutable_employee_position(self):
-        with self.assertRaises(AttributeError) as exception:
+        with self.assertRaises(ImmutableAttributeError) as exception:
             self.employee.position = fake.word()
 
         self.assertEqual(str(exception.exception), "Cannot modify the position attribute.")
 
     def test_immutable_employee_created_at(self):
-        with self.assertRaises(AttributeError) as exception:
+        with self.assertRaises(ImmutableAttributeError) as exception:
             self.employee.created_at = TimeUtility.get_current_time()
         self.assertEqual(str(exception.exception), "Cannot modify the created_at attribute.")
 
     def test_immutable_employee_updated_at(self):
-        with self.assertRaises(AttributeError) as exception:
+        with self.assertRaises(ImmutableAttributeError) as exception:
             self.employee.updated_at = TimeUtility.get_current_time()
 
         self.assertEqual(str(exception.exception), "Cannot modify the updated_at attribute.")

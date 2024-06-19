@@ -5,6 +5,7 @@ from unittest import TestCase
 from uuid import UUID
 
 from employee_management_system.core.repositories.base_repository import CRUDRepository, T
+from employee_management_system.exceptions.immutable import ImmutableAttributeError
 
 
 class Entity:
@@ -18,7 +19,7 @@ class Entity:
 
     @name.setter
     def name(self, value: str):
-        raise AttributeError("Cannot modify the name attribute.")
+        raise ImmutableAttributeError("Cannot modify the name attribute.")
 
     @property
     def id(self) -> uuid.UUID:
