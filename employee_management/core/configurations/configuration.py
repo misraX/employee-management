@@ -43,5 +43,8 @@ class Configuration:
 
 
 @lru_cache
-def configuration() -> Configuration:
+def get_configuration() -> Configuration:
     return Configuration()
+
+
+configuration = get_configuration()
