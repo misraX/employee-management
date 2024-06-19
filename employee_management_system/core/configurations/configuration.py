@@ -11,6 +11,10 @@ load_dotenv(dotenv_path=os.path.join(BASE_DIR, ".env"))
 
 class Configuration:
     @property
+    def logging_level(self):
+        return os.getenv("LOGGING_LEVEL", "INFO")
+
+    @property
     def base_dir(self) -> pathlib.Path:
         """
         Base directory for all configuration files
