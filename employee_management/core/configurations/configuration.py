@@ -15,7 +15,10 @@ class Configuration:
 
     @property
     def database_url(self):
-        return os.path.join(self.base_dir, os.getenv("DATABASE_URL"))
+        database_url_from_env = os.getenv("DATABASE_URL")
+        if database_url_from_env != ":memory:":
+            return os.path.join(self.base_dir, os.getenv("DATABASE_URL"))
+        return database_url_from_env
 
     @property
     def app_name(self) -> str:
