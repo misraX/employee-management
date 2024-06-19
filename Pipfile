@@ -5,6 +5,7 @@ name = "pypi"
 
 [packages]
 faker = "*"
+email-validator = "*"
 
 [dev-packages]
 conventional-pre-commit = "*"
