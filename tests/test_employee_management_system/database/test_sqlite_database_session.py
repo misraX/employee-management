@@ -4,7 +4,7 @@ import unittest
 from unittest.mock import Mock, patch
 
 from employee_management_system.core.configurations.configuration import configuration
-from employee_management_system.database.database_session import DatabaseSession
+from employee_management_system.database.sqlite_database_session import SQLiteDatabaseSession
 from employee_management_system.exceptions.sqlite_database import (
     DatabaseConnectionError,
     DatabaseOperationError,
@@ -13,9 +13,9 @@ from employee_management_system.exceptions.sqlite_database import (
 
 class DatabaseSessionTestCase(unittest.TestCase):
     def setUp(self):
-        os.environ["DATABASE_URL"] = "example.db"
+        os.environ["DATABASE_URL"] = ":memory:"
         self.db_name = configuration.database_url
-        self.db_session = DatabaseSession(db_name=self.db_name)
+        self.db_session = SQLiteDatabaseSession()
 
     def test_open_success(self):
         with patch("sqlite3.connect") as mock_connect:
@@ -67,7 +67,7 @@ class DatabaseSessionTestCase(unittest.TestCase):
     def test_context_manager_success(self):
         with patch("sqlite3.connect") as mock_connect:
             mock_connect.return_value.cursor.return_value = Mock()
-            with DatabaseSession(self.db_name) as db_session:
+            with SQLiteDatabaseSession() as db_session:
                 self.assertIsNotNone(db_session._connection)
                 self.assertIsNotNone(db_session._cursor)
             mock_connect.return_value.cursor.return_value.close.assert_called_once()
@@ -76,7 +76,7 @@ class DatabaseSessionTestCase(unittest.TestCase):
     def test_context_manager_with_exception(self):
         with patch("sqlite3.connect") as mock_connect:
             mock_connect.return_value.cursor.return_value = Mock()
-            with self.assertRaises(ValueError), DatabaseSession(self.db_name) as db_session:
+            with self.assertRaises(ValueError), SQLiteDatabaseSession() as db_session:
                 self.assertIsNotNone(db_session._connection)
                 self.assertIsNotNone(db_session._cursor)
                 raise ValueError("Test exception")
@@ -89,7 +89,7 @@ class TestDatabaseSessionIntegrationTestCase(unittest.TestCase):
     def setUp(self):
         os.environ["DATABASE_URL"] = ":memory:"
         self.db_name = configuration.database_url
-        self.db_session = DatabaseSession(db_name=self.db_name)
+        self.db_session = SQLiteDatabaseSession()
 
     def test_commit_success(self):
         self.db_session.open()

@@ -1,5 +1,6 @@
 import sqlite3
 
+from employee_management_system.core.configurations.configuration import configuration
 from employee_management_system.core.database.sql_session import SQLSession
 from employee_management_system.exceptions.sqlite_database import (
     DatabaseConnectionError,
@@ -11,9 +12,9 @@ from employee_management_system.logging.logger import logger as logging
 logger = logging.getLogger(format_logger_name("sqlite_database_session"))
 
 
-class DatabaseSession(SQLSession):
-    def __init__(self, db_name: str = ":memory:"):
-        self._db_name: str = db_name
+class SQLiteDatabaseSession(SQLSession):
+    def __init__(self):
+        self._db_name: str = configuration.database_url
         self._connection: sqlite3.Connection | None = None
         self._cursor: sqlite3.Cursor | None = None
 
@@ -97,7 +98,7 @@ class DatabaseSession(SQLSession):
             raise DatabaseConnectionError("Database session is not open. Call 'open' first.")
         return self._connection
 
-    def __enter__(self) -> "DatabaseSession":
+    def __enter__(self) -> "SQLiteDatabaseSession":
         """
         Database session enter, opens a new database session
 

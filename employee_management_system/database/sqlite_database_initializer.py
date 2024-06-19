@@ -1,7 +1,7 @@
 import sqlite3
 
 
-class DatabaseInitializer:
+class SQLiteDatabaseInitializer:
     def __init__(self, db_name: str = ":memory:"):
         self._conn = sqlite3.connect(db_name)
 

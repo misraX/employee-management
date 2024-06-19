@@ -4,14 +4,16 @@ import unittest
 from unittest.mock import Mock, patch
 
 from employee_management_system.core.configurations.configuration import configuration
-from employee_management_system.database.database_initializer import DatabaseInitializer
+from employee_management_system.database.sqlite_database_initializer import (
+    SQLiteDatabaseInitializer,
+)
 
 
 class DatabaseInitializerUnitTestCase(unittest.TestCase):
     def setUp(self):
         os.environ["DATABASE_URL"] = ":memory:"
         self.config = configuration
-        self.database_initializer = DatabaseInitializer()
+        self.database_initializer = SQLiteDatabaseInitializer()
 
     @patch("sqlite3.connect")
     def test_create_employee_table(self, mock_connect: Mock) -> None:
@@ -19,7 +21,7 @@ class DatabaseInitializerUnitTestCase(unittest.TestCase):
         mock_connect.return_value = mock_conn
         mock_cursor = Mock()
         mock_conn.cursor.return_value = mock_cursor
-        db_initializer = DatabaseInitializer()
+        db_initializer = SQLiteDatabaseInitializer()
         db_initializer.create_employee_table()
         mock_connect.assert_called_once_with(":memory:")
         mock_conn.cursor.assert_called_once()
@@ -43,7 +45,7 @@ class DatabaseInitializerUnitTestCase(unittest.TestCase):
 class DatabaseInitializerIntegrationTestCase(unittest.TestCase):
     def setUp(self):
         self.config = configuration
-        self.database_initializer = DatabaseInitializer()
+        self.database_initializer = SQLiteDatabaseInitializer()
 
     def test_create_employee_table(self):
         self.database_initializer.create_employee_table()
