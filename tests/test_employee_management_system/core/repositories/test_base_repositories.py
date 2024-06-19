@@ -4,7 +4,7 @@ from typing import Final
 from unittest import TestCase
 from uuid import UUID
 
-from employee_management.core.repositories.base_repository import CRUDRepository, T
+from employee_management_system.core.repositories.base_repository import CRUDRepository, T
 
 
 class Entity:
@@ -83,9 +83,7 @@ class TestCRUDRepository(TestCase):
         self.repository.add(self.entity)
         with self.assertRaises(AttributeError) as attribute_error:
             self.entity.name = "Modified test"
-        self.assertEqual(
-            attribute_error.exception.__str__(), "Cannot modify the name attribute."
-        )
+        self.assertEqual(attribute_error.exception.__str__(), "Cannot modify the name attribute.")
 
 
 if __name__ == "__main__":

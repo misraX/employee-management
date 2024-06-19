@@ -3,9 +3,9 @@ from unittest import TestCase
 
 from faker import Faker
 
-from employee_management.apps.employee.models.employee import Employee
-from employee_management.exceptions.email import EmailValidationException
-from employee_management.utilities.time import TimeUtility
+from employee_management_system.apps.employee.models.employee import Employee
+from employee_management_system.exceptions.email import EmailValidationException
+from employee_management_system.utilities.time import TimeUtility
 
 fake = Faker()
 

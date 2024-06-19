@@ -1,5 +1,5 @@
-from employee_management.core.configurations.configuration import configuration
-from employee_management.database.database_initializer import DatabaseInitializer
+from employee_management_system.core.configurations.configuration import configuration
+from employee_management_system.database.database_initializer import DatabaseInitializer
 
 
 def main():
