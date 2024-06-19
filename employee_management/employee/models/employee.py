@@ -6,7 +6,8 @@ from employee_management.validators.email import EmailValidator
 
 class Employee:
     """
-    A model representing an employee, this object ensure that the properties are final and immutable.
+    A model representing an employee, this object ensure that the properties
+    are final and immutable.
 
     By using python's setters we ensure the immutability of the object properties.
     """
@@ -26,9 +27,6 @@ class Employee:
         self._email: Final[str] = EmailValidator.email(email)
         self._created_at: Final[datetime] = created_at
         self._updated_at: Final[datetime] = updated_at
-
-    def __str__(self):
-        return f"Employee {self.name} - salary {self.salary} - position {self.position} - email {self.email} - created at {self.created_at} - updated at {self.updated_at} "
 
     @property
     def name(self) -> str:
@@ -77,3 +75,9 @@ class Employee:
     @updated_at.setter
     def updated_at(self, updated_at: datetime):
         raise AttributeError("Cannot modify updated_at attribute.")
+
+    def __str__(self):
+        return (
+            f"Employee {self.name} - salary {self.salary} - position {self.position}"
+            f"- email {self.email} - created at {self.created_at} - updated at {self.updated_at}"
+        )

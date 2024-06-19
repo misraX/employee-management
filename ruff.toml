@@ -1,5 +1,5 @@
 target-version = "py312"
-line-length = 80
+line-length = 100
 
 [lint]
 select = [
@@ -10,4 +10,8 @@ select = [
     "I", # isort
     "B", # flake8-bugbear
     "SIM", # flake8-simplify
+    "E", # pycodestyle
+    "W", # pycodestyle
+    "F", # Pyflakes
+
 ]

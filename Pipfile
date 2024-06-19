@@ -19,6 +19,8 @@ flake8-print = "*"
 flake8-no-pep420 = "*"
 flake8-quotes = "*"
 flake8-simplify = "*"
+pycodestyle = "*"
+pyflakes = "*"
 
 [requires]
 python_version = "3.12"
