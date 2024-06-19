@@ -5,6 +5,12 @@ from employee_management.validators.email import EmailValidator
 
 
 class Employee:
+    """
+    A model representing an employee, this object ensure that the properties are final and immutable.
+
+    By using python's setters we ensure the immutability of the object properties.
+    """
+
     def __init__(
         self,
         name: str,
