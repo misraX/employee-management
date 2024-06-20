@@ -6,12 +6,11 @@ from holidays import country_holidays
 from server.employee_management.apps.holidays.backends.backend import HolidaysBackend
 
 
-class HolidayDateTimeModel:
-    ...
-    # def __init__(self, date:):
-
-
 class PyPiHolidaysBackend(HolidaysBackend):
+    """
+    PyPi Holidays Backend, retrieve the data from https://pypi.org/project/holidays/
+    """
+
     def get_holidays(
         self,
         country: str,
