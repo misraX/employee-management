@@ -18,6 +18,16 @@ class PyPiHolidaysBackend(HolidaysBackend):
         categories: Tuple[str],
         language: str = "en_US",
     ) -> list[tuple[date, str]] | None:
+        """
+        Get holidays for a given country, years, categories and language.
+
+
+        :param country: string, the name of the country code
+        :param years: list of years as integers
+        :param categories: list of categories as strings ['public', 'bank']
+        :param language: string, the code of the language example 'en_US'
+        :return: list[tuple[date, str]] or None
+        """
         holidays = country_holidays(
             country=country, years=years, categories=categories, language=language
         )
