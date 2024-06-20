@@ -6,7 +6,7 @@ A simple Employee Database Management System using OOP
 
 ```text
 
-employee_management_system/ Main Project package
+employee_management/ Main Project package
 ├── apps/ Applications package like employee, holidays
 │   └── employee/ # The Employee app
 │       ├── models/ # The Employee's model
@@ -22,7 +22,7 @@ employee_management_system/ Main Project package
 └── validators/ # Project Validators like EmailValidator
 
 tests/
-└── test_employee_management_system/
+└── test_employee_management/
     ├── apps/
     │   └── employee/
     │       ├── models/
