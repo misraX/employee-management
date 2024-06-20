@@ -5,7 +5,9 @@ from unittest.mock import patch
 from faker import Faker
 from holidays import PUBLIC
 
-from server.employee_management.apps.holidays.backends.pypi_holidays import PyPiHolidaysBackend
+from server.employee_management.apps.employee_holidays.backends.pypi_holidays import (
+    PyPiHolidaysBackend,
+)
 
 faker = Faker()
 
@@ -24,7 +26,9 @@ class PyPiHolidaysTests(unittest.TestCase):
         for holiday in get_holidays:
             self.assertEqual(holiday[0].year, self.holiday_years[0])
 
-    @patch("server.employee_management.apps.holidays.backends.pypi_holidays.country_holidays")
+    @patch(
+        "server.employee_management.apps.employee_holidays.backends.pypi_holidays.country_holidays"
+    )
     def test_get_holidays_no_holidays(self, mock_country_holidays):
         mock_country_holidays.return_value = {}
 
@@ -36,7 +40,9 @@ class PyPiHolidaysTests(unittest.TestCase):
 
         self.assertIsNone(holidays)
 
-    @patch("server.employee_management.apps.holidays.backends.pypi_holidays.country_holidays")
+    @patch(
+        "server.employee_management.apps.employee_holidays.backends.pypi_holidays.country_holidays"
+    )
     def test_get_holidays(self, mock_country_holidays):
         mock_country_holidays.return_value = {
             date(2024, 1, 1): "New Year's Day",

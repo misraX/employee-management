@@ -24,6 +24,7 @@ class Employee:
         created_at: datetime | None = None,
         updated_at: datetime | None = None,
         employee_id: uuid.UUID | None = None,
+        country: str | None = None,
     ):
         self._name: Final[str] = name
         self._salary: Final[float] = salary
@@ -36,6 +37,7 @@ class Employee:
             updated_at if updated_at else TimeUtility.get_current_time()
         )
         self._employee_id: Final[uuid.UUID] = employee_id if employee_id else uuid.uuid4()
+        self._country: Final[str] = country
 
     @property
     def name(self) -> str:
@@ -92,6 +94,14 @@ class Employee:
     @employee_id.setter
     def employee_id(self, employee_id: uuid.UUID):
         raise ImmutableAttributeError("Cannot modify the employee id")
+
+    @property
+    def country(self) -> str:
+        return self._country
+
+    @country.setter
+    def country(self, country: str):
+        raise ImmutableAttributeError("Cannot modify the country attribute.")
 
     def __str__(self):
         return (

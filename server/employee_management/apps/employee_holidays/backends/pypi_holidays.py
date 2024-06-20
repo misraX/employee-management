@@ -3,7 +3,7 @@ from typing import List, Tuple
 
 from holidays import country_holidays
 
-from server.employee_management.apps.holidays.backends.backend import HolidaysBackend
+from server.employee_management.apps.employee_holidays.backends.backend import HolidaysBackend
 
 
 class PyPiHolidaysBackend(HolidaysBackend):
@@ -19,7 +19,7 @@ class PyPiHolidaysBackend(HolidaysBackend):
         language: str = "en_US",
     ) -> List[tuple[date, str]] | None:
         """
-        Get holidays for a given country, years, categories and language.
+        Get employee_holidays for a given country, years, categories and language.
 
 
         :param country: string, the name of the country code
