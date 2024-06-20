@@ -17,7 +17,7 @@ class CRUDRepository(Repository, Generic[T]):
     """
 
     @abc.abstractmethod
-    def get(self, entity_id: uuid.UUID) -> T:
+    def get(self, entity_id: uuid.UUID) -> T | None:
         """
         Get entity by ID.
 
@@ -46,11 +46,11 @@ class CRUDRepository(Repository, Generic[T]):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def update(self, entity_id: uuid.UUID, update: T) -> T:
+    def update(self, entity_id: uuid.UUID, update: dict) -> T:
         """
         Update entity in repository.
 
         :param entity_id: uuid.UUID
-        :param update: T
+        :param update: dict of updates (table_column: value)
         """
         raise NotImplementedError

@@ -1,11 +1,19 @@
+import os
+
 from employee_management.core.configurations.configuration import configuration
-from employee_management.database.database_initializer import DatabaseInitializer
+from employee_management.database.sqlite_database_initializer import (
+    SQLiteDatabaseInitializer,
+)
+from employee_management.logging.logger import format_logger_name
+from employee_management.logging.logger import logger as logging
+
+logger = logging.getLogger(format_logger_name(configuration.app_name))
 
 
 def main():
-    # Initialize the database and create tables
     config = configuration
-    db_initializer = DatabaseInitializer(db_name=config.database_url)
+    os.environ["DATABASE_URL"] = "example.db"
+    db_initializer = SQLiteDatabaseInitializer(db_name=config.database_url)
     db_initializer.create_employee_table()
 
 

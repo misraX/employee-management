@@ -1,7 +1,7 @@
 import sqlite3
 
 
-class DatabaseInitializer:
+class SQLiteDatabaseInitializer:
     def __init__(self, db_name: str = ":memory:"):
         self._conn = sqlite3.connect(db_name)
 
@@ -16,7 +16,7 @@ class DatabaseInitializer:
                 email TEXT NOT NULL,
                 salary REAL NOT NULL,
                 created_at TEXT NOT NULL,
-                modified_at TEXT NOT NULL
+                updated_at TEXT NOT NULL
             )
         """
         )
