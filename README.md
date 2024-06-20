@@ -1,3 +1,5 @@
+![Coverage](https://misrax.github.io/employee-management/coverage.svg)
+
 # Employee Management
 
 A simple Employee Database Management System using OOP
