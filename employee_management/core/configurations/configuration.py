@@ -32,7 +32,7 @@ class Configuration:
         :return: str
         """
         database_url_from_env = os.getenv("DATABASE_URL")
-        if database_url_from_env != ":memory:":
+        if not database_url_from_env.startswith(":memory:"):
             return os.path.join(self.base_dir, os.getenv("DATABASE_URL"))
         return database_url_from_env
 

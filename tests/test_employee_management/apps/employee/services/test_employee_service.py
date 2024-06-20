@@ -23,7 +23,7 @@ faker = Faker()
 
 class TestEmployeeService(unittest.TestCase):
     def setUp(self):
-        os.environ["DATABASE_URL"] = "example.db"
+        os.environ["DATABASE_URL"] = ":memory:?cache=shared"
         # Initialize the employee tables
         db_initializer = SQLiteDatabaseInitializer(db_name=config.database_url)
         db_initializer.create_employee_table()
