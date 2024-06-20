@@ -5,10 +5,10 @@ import click
 from client.employee_management.cli.employee_cli import EmployeeCLI
 from client.employee_management.models.employee_model import EmployeeModel
 from client.employee_management.utilities.timezone_utils import TimezoneUtils
-from employee_management.apps.employee.repositories.employee_repository import (
+from server.employee_management.apps.employee.repositories.employee_repository import (
     EmployeeSQLiteRepository,
 )
-from employee_management.apps.employee.services.employee_service import EmployeeService
+from server.employee_management.apps.employee.services.employee_service import EmployeeService
 
 timezone_utils = TimezoneUtils()
 employee_utils = EmployeeModel(timezone_utils)

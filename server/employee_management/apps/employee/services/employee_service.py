@@ -1,7 +1,7 @@
 import uuid
 
-from employee_management.apps.employee.models.employee import Employee
-from employee_management.apps.employee.repositories.employee_repository import (
+from server.employee_management.apps.employee.models.employee import Employee
+from server.employee_management.apps.employee.repositories.employee_repository import (
     EmployeeSQLiteRepository,
 )
 

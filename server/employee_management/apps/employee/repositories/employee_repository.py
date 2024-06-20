@@ -1,9 +1,9 @@
 import uuid
 
-from employee_management.apps.employee.models.employee import Employee
-from employee_management.core.repositories.base_repository import CRUDRepository, T
-from employee_management.database.sqlite_database_session import SQLiteDatabaseSession
-from employee_management.utilities.time import TimeUtility
+from server.employee_management.apps.employee.models.employee import Employee
+from server.employee_management.core.repositories.base_repository import CRUDRepository, T
+from server.employee_management.database.sqlite_database_session import SQLiteDatabaseSession
+from server.employee_management.utilities.time import TimeUtility
 
 
 class EmployeeSQLiteRepository(CRUDRepository[Employee]):

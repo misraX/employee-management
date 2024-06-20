@@ -3,10 +3,10 @@ from unittest import TestCase
 
 from faker import Faker
 
-from employee_management.apps.employee.models.employee import Employee
-from employee_management.exceptions.email import EmailValidationException
-from employee_management.exceptions.immutable import ImmutableAttributeError
-from employee_management.utilities.time import TimeUtility
+from server.employee_management.apps.employee.models.employee import Employee
+from server.employee_management.exceptions.email import EmailValidationException
+from server.employee_management.exceptions.immutable import ImmutableAttributeError
+from server.employee_management.utilities.time import TimeUtility
 
 faker = Faker()
 

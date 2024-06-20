@@ -1,7 +1,7 @@
 import os
 import unittest
 
-from employee_management.core.configurations.configuration import Configuration
+from server.employee_management.core.configurations.configuration import Configuration
 
 
 class ConfigurationTests(unittest.TestCase):

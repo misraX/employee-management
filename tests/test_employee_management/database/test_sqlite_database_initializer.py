@@ -3,8 +3,8 @@ import sqlite3
 import unittest
 from unittest.mock import Mock, patch
 
-from employee_management.core.configurations.configuration import configuration
-from employee_management.database.sqlite_database_initializer import (
+from server.employee_management.core.configurations.configuration import configuration
+from server.employee_management.database.sqlite_database_initializer import (
     SQLiteDatabaseInitializer,
 )
 

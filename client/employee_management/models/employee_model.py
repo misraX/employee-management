@@ -1,7 +1,7 @@
 from typing import Dict
 
 from client.employee_management.utilities.timezone_utils import TimezoneUtils
-from employee_management.apps.employee.models.employee import Employee
+from server.employee_management.apps.employee.models.employee import Employee
 
 
 class EmployeeModel:
