@@ -20,6 +20,8 @@ class EmployeeService:
         return self._employee_repository.delete(entity_id=employee_id)
 
     def update_employee(self, employee_id: uuid.UUID, values: dict) -> Employee:
+        if not values:
+            raise ValueError("Employee values cannot be empty")
         return self._employee_repository.update(entity_id=employee_id, update=values)
 
     def get_all_employees(self) -> list[Employee] | None:

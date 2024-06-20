@@ -7,6 +7,8 @@ name = "pypi"
 faker = "*"
 email-validator = "*"
 python-dotenv = "*"
+pytz = "*"
+click = "*"
 
 [dev-packages]
 conventional-pre-commit = "*"
