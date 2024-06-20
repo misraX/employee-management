@@ -25,6 +25,7 @@ flake8-simplify = "*"
 pycodestyle = "*"
 pyflakes = "*"
 ruff = "*"
+requests = "*"
 
 [requires]
 python_version = "3.12"
