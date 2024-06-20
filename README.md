@@ -14,7 +14,6 @@
   </a>
 </p>
 
-
 ## Overview
 This project follows a client-server architecture, where the server contains the `employee_management` project and its related applications, and the client is a Command-Line Interface (CLI) client that consumes the server's services.
 
