@@ -51,11 +51,8 @@ jobs:
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git push -d origin gh-pages &>/dev/null  # silent cleaner
-          git branch -d gh-pages &>/dev/null  # silent cleaner
           git fetch origin
           git checkout gh-pages || git checkout --orphan gh-pages
-          git pull origin main
           git add coverage.svg
           git commit -m "Update coverage badge"
           git push origin gh-pages
