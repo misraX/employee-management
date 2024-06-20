@@ -1,6 +1,6 @@
 
 <h1 align="center">Employee Management</h1>
-<p align="center">A simple Employee Database Management System using OOP</p>
+<p align="center">A simple Employee Database Management System using</p>
 
 <p align="center">
   <a href="https://raw.githubusercontent.com/misraX/employee-management/gh-pages/coverage.svg">
