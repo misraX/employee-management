@@ -17,7 +17,7 @@ class CRUDRepository(Repository, Generic[T]):
     """
 
     @abc.abstractmethod
-    def get(self, entity_id: uuid.UUID) -> T:
+    def get(self, entity_id: uuid.UUID) -> T | None:
         """
         Get entity by ID.
 

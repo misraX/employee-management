@@ -10,8 +10,13 @@ class EmployeeSQLiteRepository(CRUDRepository[Employee]):
     def __init__(self):
         self._db_session = SQLiteDatabaseSession()
 
-    def get(self, entity_id: uuid.UUID) -> Employee:
-        self._db_session.open()
+    def get(self, entity_id: uuid.UUID) -> Employee | None:
+        """
+        Get employee by id
+
+        :param entity_id: employee id
+        :return: Employee or None
+        """
         with self._db_session as session:
             cursor = session.get_cursor()
             cursor.execute("SELECT * FROM employee WHERE employee_id = ?", (str(entity_id),))
@@ -19,6 +24,12 @@ class EmployeeSQLiteRepository(CRUDRepository[Employee]):
         return Employee(**result) if result is not None else None
 
     def delete(self, entity_id: uuid.UUID) -> None:
+        """
+        Delete an employee by entity_id
+
+        :param entity_id: employee id
+        :return: None
+        """
         with self._db_session as db_session:
             cursor = db_session.get_cursor()
             cursor.execute("DELETE FROM employee WHERE employee_id = ?", (str(entity_id),))

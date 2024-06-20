@@ -30,7 +30,7 @@ class EntityRepository(CRUDRepository[Entity]):
     def __init__(self):
         self._entities: dict[uuid.UUID, dict] = {}
 
-    def get(self, entity_id: uuid.UUID) -> T:
+    def get(self, entity_id: uuid.UUID) -> T | None:
         return self._entities.get(entity_id)
 
     def delete(self, entity_id: uuid.UUID) -> None:
