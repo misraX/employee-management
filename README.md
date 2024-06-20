@@ -14,39 +14,56 @@
   </a>
 </p>
 
+The main idea of the project is a python server/client approach.
+
+The server contains the employee_management project with it's related applications.
+
+The client contains a CLI client which consumes the server's services.
+
+The client can use any of the server services, simply by importing the services from the server application.
+
+The client has its own modeling which handles the data transformation to local data, for example a React Client which
+consumes APIs from a remote server will take in consideration date and time conversion for local/client laptop,mobile, etc.
+
+This approach can easily transform to a web or any kind of interfaces that will support API's from Rest/GraphQL or any sort of APIs
+The services are loosely coupled which uses underlying repositories and can be easily adjusted to any serializers.
+
 ## Packaging
 
 ```text
 
-employee_management/ Main Project package
-├── apps/ Applications package like employee, holidays
-│   └── employee/ # The Employee app
-│       ├── models/ # The Employee's model
-│       ├── repositories/ # The Employee's repos
-│       └── services/ # The Employee's services
-├── core/
-│   ├── configurations/ # The project configuration
-│   └── repositories/ # The project abstract base repositories where it hold Repositories and CRUDRepositories Interfaces
-├── database/ # The DB manager, like sessions, different drivers
-├── exceptions/ # Project custom Exceptions like EmailValidationException, and ImmutableAttributeError
-├── logging/ # Project logging <logger>
-├── utilities/ # Project utilities like TimeUtility
-└── validators/ # Project Validators like EmailValidator
-client/ # A CLI client to consume the services
-└── cli
-    ├── employee_management/ # A specific CLI for the Employee's service
-    └── employee_holiday/ # A holiday CLI tool, for the Employee's location
-tests/
-└── test_employee_management/
-    ├── apps/
-    │   └── employee/
-    │       ├── models/
-    │       ├── repositories/
-    │       └── services/
+server/
+└── employee_management/ Main Project package
+    ├── apps/ Applications package like employee, holidays
+    │   └── employee/ # The Employee app
+    │       ├── models/ # The Employee's model
+    │       ├── repositories/ # The Employee's repos
+    │       └── services/ # The Employee's services
     ├── core/
-    │   ├── configurations/
-    │   └── repositories/
-    └── database/
+    │   ├── configurations/ # The project configuration
+    │   └── repositories/ # The project abstract base repositories where it hold Repositories and CRUDRepositories Interfaces
+    ├── database/ # The DB manager, like sessions, different drivers
+    ├── exceptions/ # Project custom Exceptions like EmailValidationException, and ImmutableAttributeError
+    ├── logging/ # Project logging <logger>
+    ├── utilities/ # Project utilities like TimeUtility
+    └── validators/ # Project Validators like EmailValidator
+
+client/ # A CLI client to consume the services
+└── employee_management # The employee management client, the currently available client is CLI
+    ├── cli/ # A specific CLI for the Employee's service
+    └── models/ Serialize and transform the data to local clients
+tests/
+└── test_server
+    └── test_employee_management/
+        ├── apps/
+        │   └── employee/
+        │       ├── models/
+        │       ├── repositories/
+        │       └── services/
+        ├── core/
+        │   ├── configurations/
+        │   └── repositories/
+        └── database/
 ```
 
 ## Code Quality
