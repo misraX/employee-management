@@ -16,7 +16,8 @@ class SQLiteDatabaseInitializer:
                 email TEXT NOT NULL,
                 salary REAL NOT NULL,
                 created_at TEXT NOT NULL,
-                updated_at TEXT NOT NULL
+                updated_at TEXT NOT NULL,
+                country TEXT
             )
         """
         )
