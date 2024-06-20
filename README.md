@@ -13,6 +13,7 @@
     <img src="https://github.com/misraX/employee-management/actions/workflows/lint.yml/badge.svg" alt="Lint">
   </a>
 </p>
+
 ## Packaging
 
 ```text
