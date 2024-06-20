@@ -14,19 +14,23 @@
   </a>
 </p>
 
-The main idea of the project is a python server/client approach.
 
-The server contains the employee_management project with it's related applications.
+## Overview
+This project follows a client-server architecture, where the server contains the `employee_management` project and its related applications, and the client is a Command-Line Interface (CLI) client that consumes the server's services.
 
-The client contains a CLI client which consumes the server's services.
+### Server
+The server contains the `employee_management` project, which includes various applications. The server exposes its services, allowing the client to interact with them.
 
-The client can use any of the server services, simply by importing the services from the server application.
+### Client
+The client is a CLI application that can use any of the server's services by importing them. The client has its own data modeling, which handles data transformation for the local environment (e.g., date and time conversion).
 
-The client has its own modeling which handles the data transformation to local data, for example a React Client which
-consumes APIs from a remote server will take in consideration date and time conversion for local/client laptop,mobile, etc.
+This approach can be easily transformed to support different types of interfaces, such as a web application or mobile app, that can consume the server's APIs. The services are loosely coupled, using underlying repositories, and can be easily adjusted to work with various serializers.
 
-This approach can easily transform to a web or any kind of interfaces that will support API's from Rest/GraphQL or any sort of APIs
-The services are loosely coupled which uses underlying repositories and can be easily adjusted to any serializers.
+## Key Features
+1. **Server-Client Architecture**: The project follows a client-server approach, where the server hosts the `employee_management` project and the client consumes the server's services.
+2. **Loose Coupling**: The services are loosely coupled, using underlying repositories, which allows for easy adjustments and adaptations to different serializers.
+3. **Data Transformation**: The client handles data transformation, such as date and time conversion, to ensure compatibility with the local environment.
+4. **Scalability**: The server-client architecture allows for easy scaling and expansion of the system, as the client can be adapted to different types of interfaces (web, mobile, etc.) while consuming the same server-side services.
 
 ## Packaging
 
