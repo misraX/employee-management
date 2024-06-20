@@ -1,5 +1,6 @@
 ![Coverage](https://raw.githubusercontent.com/misraX/employee-management/gh-pages/coverage.svg)
-
+[![Python Tests](https://github.com/misraX/employee-management/actions/workflows/test.yml/badge.svg)](https://github.com/misraX/employee-management/actions/workflows/test.yml)
+[![Lint](https://github.com/misraX/employee-management/actions/workflows/lint.yml/badge.svg)](https://github.com/misraX/employee-management/actions/workflows/lint.yml)
 # Employee Management
 
 A simple Employee Database Management System using OOP
