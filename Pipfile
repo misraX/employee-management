@@ -24,6 +24,7 @@ flake8-quotes = "*"
 flake8-simplify = "*"
 pycodestyle = "*"
 pyflakes = "*"
+ruff = "*"
 
 [requires]
 python_version = "3.12"
