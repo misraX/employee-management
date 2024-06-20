@@ -16,10 +16,13 @@ class EmployeeSQLiteRepository(CRUDRepository[Employee]):
             cursor = session.get_cursor()
             cursor.execute("SELECT * FROM employee WHERE employee_id = ?", (str(entity_id),))
             result = cursor.fetchone()
-        return Employee(**result)
+        return Employee(**result) if result is not None else None
 
     def delete(self, entity_id: uuid.UUID) -> None:
-        pass
+        with self._db_session as db_session:
+            cursor = db_session.get_cursor()
+            cursor.execute("DELETE FROM employee WHERE employee_id = ?", (str(entity_id),))
+            db_session.commit()
 
     def add(self, entity: Employee) -> Employee:
         """

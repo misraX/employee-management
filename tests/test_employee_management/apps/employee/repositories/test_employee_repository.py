@@ -78,6 +78,19 @@ class TestEmployeeSQLiteRepository(unittest.TestCase):
         )  # Runtime won't convert the type
         self.assertNotEqual(added_employee.name, updated_employee.get("name"))
 
+    def test_delete_employee(self):
+        employee = Employee(
+            name=self.employee_name,
+            position="Analyst",
+            email=self.employee_email,
+            salary=self.employee_salary,
+        )
+        self.repository.add(employee)
+
+        self.repository.delete(employee.employee_id)
+        deleted_employee = self.repository.get(employee.employee_id)
+        self.assertIsNone(deleted_employee)
+
 
 if __name__ == "__main__":
     unittest.main()
