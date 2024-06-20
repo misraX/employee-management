@@ -11,7 +11,12 @@ class EmployeeSQLiteRepository(CRUDRepository[Employee]):
         self._db_session = SQLiteDatabaseSession()
 
     def get(self, entity_id: uuid.UUID) -> Employee:
-        pass
+        self._db_session.open()
+        with self._db_session as session:
+            cursor = session.get_cursor()
+            cursor.execute("SELECT * FROM employee WHERE employee_id = ?", (str(entity_id),))
+            result = cursor.fetchone()
+        return Employee(**result)
 
     def delete(self, entity_id: uuid.UUID) -> None:
         pass
@@ -24,28 +29,46 @@ class EmployeeSQLiteRepository(CRUDRepository[Employee]):
         :return: Employee
         """
         now = TimeUtility.get_current_time()
-        self._db_session.open()
-        cursor = self._db_session.get_cursor()
-        cursor.execute(
-            """
-              INSERT INTO employee (
-              employee_id, name, position, email, salary, created_at, updated_at
-              )
-              VALUES (?, ?, ?, ?, ?, ?, ?)
-          """,
-            (
-                str(entity.entity_id),
-                entity.name,
-                entity.position,
-                entity.email,
-                entity.salary,
-                str(now),
-                str(now),
-            ),
-        )
-        self._db_session.commit()
-        cursor.close()
+        with self._db_session as session:
+            cursor = session.get_cursor()
+            cursor.execute(
+                """
+                  INSERT INTO employee (
+                  employee_id, name, position, email, salary, created_at, updated_at
+                  )
+                  VALUES (?, ?, ?, ?, ?, ?, ?)
+              """,
+                (
+                    str(entity.employee_id),
+                    entity.name,
+                    entity.position,
+                    entity.email,
+                    entity.salary,
+                    str(now),
+                    str(now),
+                ),
+            )
+            self._db_session.commit()
         return entity
 
-    def update(self, entity_id: uuid.UUID, update: Employee) -> Employee:
-        pass
+    def update(self, entity_id: uuid.UUID, update: dict) -> Employee:
+        columns = ", ".join(f"{key} = ?" for key in update)
+        values = list(update.values())
+        values.append(str(TimeUtility.get_current_time()))
+        values.append(str(entity_id))
+        with self._db_session as session:
+            cursor = session.get_cursor()
+            cursor.execute(
+                f"""
+                    UPDATE employee
+                    SET {columns}, updated_at = ?
+                    WHERE employee_id = ?
+                """,
+                values,
+            )
+            employee = cursor.execute(
+                "SELECT * FROM employee WHERE employee_id = ?", (str(entity_id),)
+            )
+            result = employee.fetchone()
+        employee = Employee(**result)
+        return employee

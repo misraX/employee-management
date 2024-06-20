@@ -35,7 +35,7 @@ class TestEmployeeSQLiteRepository(unittest.TestCase):
     def test_add_employee(self):
         employee_id = uuid.uuid4()
         employee = Employee(
-            entity_id=employee_id,
+            employee_id=employee_id,
             name=self.employee_name,
             position="Software Engineer",
             email=self.employee_email,
@@ -60,6 +60,23 @@ class TestEmployeeSQLiteRepository(unittest.TestCase):
         self.assertEqual(result["salary"], self.employee_salary)
         self.assertEqual(result["created_at"], now)
         self.assertEqual(result["updated_at"], now)
+
+    def test_update_employee(self):
+        employee = Employee(
+            name=self.employee_name,
+            position="Software Engineer",
+            email=self.employee_email,
+            salary=self.employee_salary,
+        )
+        now = "2024-06-20 00:03:42.746949+00:00"
+        with patch.object(TimeUtility, "get_current_time", return_value=now):
+            added_employee = self.repository.add(employee)
+        updated_employee = {"name": faker.name(), "position": "Software Engineer"}
+        update = self.repository.update(added_employee.employee_id, updated_employee)
+        self.assertEqual(
+            str(employee.employee_id), update.employee_id
+        )  # Runtime won't convert the type
+        self.assertNotEqual(added_employee.name, updated_employee.get("name"))
 
 
 if __name__ == "__main__":

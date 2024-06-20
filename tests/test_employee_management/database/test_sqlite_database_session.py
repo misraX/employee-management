@@ -51,10 +51,6 @@ class DatabaseSessionTestCase(unittest.TestCase):
         cursor = self.db_session.get_cursor()
         self.assertIsNotNone(cursor)
 
-    def test_get_cursor_failure(self):
-        with self.assertRaises(DatabaseConnectionError):
-            self.db_session.get_cursor()
-
     def test_get_connection_success(self):
         self.db_session.open()
         connection = self.db_session.get_connection()

@@ -126,4 +126,6 @@ class SQLiteDatabaseSession(SQLSession):
         """
         if exc_type or exc_val or exc_tb:
             self.rollback()
+        else:
+            self.commit()
         self.close()

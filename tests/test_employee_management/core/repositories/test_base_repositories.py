@@ -28,7 +28,7 @@ class Entity:
 
 class EntityRepository(CRUDRepository[Entity]):
     def __init__(self):
-        self._entities: dict[uuid.UUID, Entity] = {}
+        self._entities: dict[uuid.UUID, dict] = {}
 
     def get(self, entity_id: uuid.UUID) -> T:
         return self._entities.get(entity_id)
@@ -37,16 +37,16 @@ class EntityRepository(CRUDRepository[Entity]):
         return self._entities.pop(entity_id, None)
 
     def add(self, entity: T) -> T:
-        self._entities[entity.id] = entity
+        self._entities[entity.id] = dict(name=entity.name, id=entity.id)
         return entity
 
-    def update(self, entity_id: uuid.UUID, update: T) -> T:
+    def update(self, entity_id: uuid.UUID, update: dict) -> T:
         if entity_id not in self._entities:
             raise KeyError
-        self._entities[entity_id] = update
+        self._entities[entity_id].update(update)
         return update
 
-    def get_all(self) -> dict[UUID, Entity]:
+    def get_all(self) -> dict[UUID, dict]:
         return self._entities
 
 
@@ -58,15 +58,17 @@ class TestCRUDRepository(TestCase):
 
     def test_add(self):
         self.repository.add(self.entity)
-        self.assertEqual(self.entity, self.repository.get(self.entity.id))
-        self.assertEqual(self.entity.name, self.repository.get(self.entity.id).name)
+        self.assertEqual(
+            dict(name=self.entity.name, id=self.entity.id), self.repository.get(self.entity.id)
+        )
+        self.assertEqual(self.entity.name, self.repository.get(self.entity.id).get("name"))
 
     def test_update(self):
         self.repository.add(self.entity)
-        updates = Entity(name="Modified test", entity_id=self.entity.id)
+        updates = dict(name="Modified test")
         self.repository.update(entity_id=self.entity.id, update=updates)
         entity = self.repository.get(self.entity.id)
-        self.assertEqual(entity.name, updates.name)
+        self.assertEqual(entity.get("name"), updates.get("name"))
 
     def test_delete(self):
         self.repository.add(self.entity)

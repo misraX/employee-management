@@ -23,7 +23,7 @@ class Employee:
         email: str,
         created_at: datetime | None = None,
         updated_at: datetime | None = None,
-        entity_id: uuid.UUID | None = None,
+        employee_id: uuid.UUID | None = None,
     ):
         self._name: Final[str] = name
         self._salary: Final[float] = salary
@@ -35,7 +35,7 @@ class Employee:
         self._updated_at: Final[datetime] = (
             updated_at if updated_at else TimeUtility.get_current_time()
         )
-        self._id: Final[uuid.UUID] = entity_id if entity_id else uuid.uuid4()
+        self._employee_id: Final[uuid.UUID] = employee_id if employee_id else uuid.uuid4()
 
     @property
     def name(self) -> str:
@@ -86,12 +86,16 @@ class Employee:
         raise ImmutableAttributeError("Cannot modify the updated_at attribute.")
 
     @property
-    def entity_id(self) -> uuid.UUID:
-        return self._id
+    def employee_id(self) -> uuid.UUID:
+        return self._employee_id
+
+    @employee_id.setter
+    def employee_id(self, employee_id: uuid.UUID):
+        raise ImmutableAttributeError("Cannot modify the employee id")
 
     def __str__(self):
         return (
-            f"Employee: <{self.entity_id}> {self.name} - salary {self.salary} "
+            f"Employee: <{self.employee_id}> {self.name} - salary {self.salary} "
             f"- position {self.position} - email {self.email} - created at {self.created_at}"
             f"- updated at {self.updated_at}"
         )
