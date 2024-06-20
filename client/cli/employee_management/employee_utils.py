@@ -1,6 +1,6 @@
 from typing import Dict
 
-from cli.employee_management.timezone_utils import TimezoneUtils
+from client.cli.employee_management.timezone_utils import TimezoneUtils
 from employee_management.apps.employee.models.employee import Employee
 
 

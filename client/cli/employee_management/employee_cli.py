@@ -1,7 +1,7 @@
 import uuid
 from typing import Dict, List
 
-from cli.employee_management.employee_utils import EmployeeUtils
+from client.cli.employee_management.employee_utils import EmployeeUtils
 from employee_management.apps.employee.models.employee import Employee
 from employee_management.apps.employee.services.employee_service import EmployeeService
 

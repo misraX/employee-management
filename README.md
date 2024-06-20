@@ -1,8 +1,8 @@
 
-<h1 align="center">Employee Management</h1>
-<p align="center">A simple Employee Database Management System</p>
+<h1 style="text-align: center">Employee Management</h1>
+<p style="text-align: center">A simple Employee Database Management System</p>
 
-<p align="center">
+<p style="text-align: center">
   <a href="https://raw.githubusercontent.com/misraX/employee-management/gh-pages/coverage.svg">
     <img src="https://raw.githubusercontent.com/misraX/employee-management/gh-pages/coverage.svg" alt="Coverage">
   </a>
@@ -32,7 +32,10 @@ employee_management/ Main Project package
 ├── logging/ # Project logging <logger>
 ├── utilities/ # Project utilities like TimeUtility
 └── validators/ # Project Validators like EmailValidator
-
+client/ # A CLI client to consume the services
+└── cli
+    ├── employee_management/ # A specific CLI for the Employee's service
+    └── employee_holiday/ # A holiday CLI tool, for the Employee's location
 tests/
 └── test_employee_management/
     ├── apps/

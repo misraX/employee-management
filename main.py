@@ -2,9 +2,9 @@ import json
 
 import click
 
-from cli.employee_management.employee_cli import EmployeeCLI
-from cli.employee_management.employee_utils import EmployeeUtils
-from cli.employee_management.timezone_utils import TimezoneUtils
+from client.cli.employee_management.employee_cli import EmployeeCLI
+from client.cli.employee_management.employee_utils import EmployeeUtils
+from client.cli.employee_management.timezone_utils import TimezoneUtils
 from employee_management.apps.employee.repositories.employee_repository import (
     EmployeeSQLiteRepository,
 )

@@ -47,7 +47,7 @@ class EmployeeModelTestCase(TestCase):
 
         self.assertEqual(
             str(exception.exception),
-            "The email address is not valid. It must have exactly one @-sign.",
+            "An email address must have an @-sign.",
         )
 
     def test_immutable_employee_name(self):
