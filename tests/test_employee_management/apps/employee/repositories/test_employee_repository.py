@@ -95,6 +95,21 @@ class TestEmployeeSQLiteRepository(unittest.TestCase):
         deleted_employee = self.repository.get(employee.employee_id)
         self.assertIsNone(deleted_employee)
 
+    def test_get_all_employees(self):
+        employee = Employee(
+            name=self.employee_name,
+            position="Analyst",
+            email=self.employee_email,
+            salary=self.employee_salary,
+        )
+        self.repository.add(employee)
+        all_employees = self.repository.get_all()
+        self.assertEqual(len(all_employees), 1)
+        items = []
+        for employee in all_employees:
+            items.append(employee.__str__())
+        self.assertEqual(self.repository.__str__(), f"{items}")
+
 
 if __name__ == "__main__":
     unittest.main()

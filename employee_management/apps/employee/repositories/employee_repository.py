@@ -93,3 +93,12 @@ class EmployeeSQLiteRepository(CRUDRepository[Employee]):
             cursor.execute("SELECT * FROM employee")
             result = cursor.fetchall()
         return [Employee(**result) for result in result] if result is not None else None
+
+    def __str__(self):
+        employees = self.get_all()
+        if not employees:
+            return ""
+        items = []
+        for employee in employees:
+            items.append(employee.__str__())
+        return f"{items}"

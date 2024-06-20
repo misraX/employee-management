@@ -24,12 +24,3 @@ class EmployeeService:
 
     def get_all_employees(self) -> list[Employee] | None:
         return self._employee_repository.get_all()
-
-    def __str__(self):
-        employees = self._employee_repository.get_all()
-        if not employees:
-            return ""
-        items = []
-        for employee in employees:
-            items.append(employee.__str__())
-        return f"{items}"

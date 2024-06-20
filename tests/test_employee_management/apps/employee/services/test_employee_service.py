@@ -111,11 +111,6 @@ class TestEmployeeService(unittest.TestCase):
             self.employee_service.add_employee(employee=employee)
         list_of_employees = self.employee_service.get_all_employees()
         self.assertEqual(len(list_of_employees), 1)
-        items = []
-        for employee in list_of_employees:
-            items.append(employee.__str__())
-        list_of_employees = self.employee_service.__str__()
-        self.assertEqual(list_of_employees, f"{items}")
 
 
 if __name__ == "__main__":
