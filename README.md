@@ -2,7 +2,7 @@
 
 A simple Employee Database Management System using OOP
 
-# Packaging
+## Packaging
 
 ```text
 
@@ -34,7 +34,7 @@ tests/
     └── database/
 ```
 
-# Code Quality
+## Code Quality
 
 This project uses several tools to ensure code quality, style consistency, and best practices.
 
