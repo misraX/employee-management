@@ -21,3 +21,6 @@ class EmployeeHolidayService:
         return self.holidays_backend.get_holidays(
             country=country, years=years, categories=categories, language=language
         )
+
+    def get_current_week_holidays(self):
+        return self.holidays_backend.get_current_week_holidays(week=datetime.today().weekday())

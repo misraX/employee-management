@@ -1,6 +1,6 @@
 import abc
 from datetime import date, datetime
-from typing import Generic, Tuple, TypeVar
+from typing import Generic, List, Tuple, TypeVar
 
 T = TypeVar("T")
 
@@ -13,5 +13,17 @@ class HolidaysBackend(abc.ABC, Generic[T]):
     @abc.abstractmethod
     def get_holidays(
         self, country: str, years: list[datetime.year], categories: Tuple[str], language: str
-    ) -> list[tuple[date, str]] | None:
-        pass
+    ) -> List[tuple[date, str]] | None:
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def get_current_week_holidays(
+        self, country: str, categories: Tuple[str], language: str = "en_US"
+    ) -> List[Tuple[date, str]] | None:
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def get_upcoming_holidays(
+        self, country: str, categories: Tuple[str], language: str = "en_US"
+    ) -> List[Tuple[date, str]] | None:
+        raise NotImplementedError

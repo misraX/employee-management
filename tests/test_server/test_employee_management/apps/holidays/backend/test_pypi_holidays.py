@@ -32,9 +32,7 @@ class PyPiHolidaysTests(unittest.TestCase):
     def test_get_holidays_no_holidays(self, mock_country_holidays):
         mock_country_holidays.return_value = {}
 
-        backend = PyPiHolidaysBackend()
-
-        holidays = backend.get_holidays(
+        holidays = self.backend.get_holidays(
             country="US", years=[2024], categories=("public",), language="en_US"
         )
 
@@ -49,9 +47,7 @@ class PyPiHolidaysTests(unittest.TestCase):
             date(2024, 12, 25): "Christmas Day",
         }
 
-        backend = PyPiHolidaysBackend()
-
-        holidays = backend.get_holidays(
+        holidays = self.backend.get_holidays(
             country="US", years=[2024], categories=("public",), language="en_US"
         )
 
@@ -60,6 +56,83 @@ class PyPiHolidaysTests(unittest.TestCase):
             (date(2024, 12, 25), "Christmas Day"),
         ]
 
+        self.assertEqual(holidays, expected_holidays)
+
+    @patch(
+        "server.employee_management.apps.employee_holidays.backends.pypi_holidays.country_holidays"
+    )
+    def test_get_current_week_holidays(self, mock_country_holidays):
+        mock_country_holidays.return_value = {
+            date(2024, 5, 1): "The Labour Day",
+            date(2024, 5, 6): "Sham El-Nassim",
+            date(2024, 6, 30): "30 June Revolution",
+        }
+        with patch(
+            "server.employee_management.apps.employee_holidays.backends.pypi_holidays.date"
+        ) as mock_holidays:
+            mock_holidays.today.return_value = date(2024, 4, 30)
+            # The start of the week will be datetime.date(2024, 4, 29)
+            # and end of week will be datetime.date(2024, 5, 5)
+            holidays = self.backend.get_current_week_holidays(
+                country=self.country,
+                categories=(self.holiday_category,),
+            )
+            expected_holidays = [
+                (
+                    date(2024, 5, 1),
+                    "The Labour Day",
+                )
+            ]
+        self.assertEqual(holidays, expected_holidays)
+
+    @patch(
+        "server.employee_management.apps.employee_holidays.backends.pypi_holidays.country_holidays"
+    )
+    def test_get_upcoming_holidays(self, mock_country_holidays):
+        mock_country_holidays.return_value = {
+            date(2024, 5, 1): "The Labour Day",
+            date(2024, 5, 6): "Sham El-Nassim",
+            date(2024, 6, 30): "30 June Revolution",
+        }
+        with patch(
+            "server.employee_management.apps.employee_holidays.backends.pypi_holidays.date"
+        ) as mock_holidays:
+            mock_holidays.today.return_value = date(2024, 4, 29)
+            # This is already a monday, so the next_seven_days will end in datetime.date(2024, 5, 6)
+            holidays = self.backend.get_upcoming_holidays(
+                country=self.country,
+                categories=(self.holiday_category,),
+            )
+            expected_holidays = [
+                (
+                    date(2024, 5, 1),
+                    "The Labour Day",
+                ),
+                (
+                    date(2024, 5, 6),
+                    "Sham El-Nassim",
+                ),
+            ]
+        self.assertEqual(holidays, expected_holidays)
+
+    @patch(
+        "server.employee_management.apps.employee_holidays.backends.pypi_holidays.country_holidays"
+    )
+    def test_get_upcoming_holidays_not_monday(self, mock_country_holidays):
+        mock_country_holidays.return_value = {
+            date(2024, 5, 1): "The Labour Day",
+            date(2024, 5, 6): "Sham El-Nassim",
+            date(2024, 6, 30): "30 June Revolution",
+        }
+        with patch(
+            "server.employee_management.apps.employee_holidays.backends.pypi_holidays.date"
+        ) as mock_holidays:
+            mock_holidays.today.return_value = date(2024, 5, 1)
+            holidays = self.backend.get_upcoming_holidays(
+                country=self.country,
+                categories=(self.holiday_category,),
+            )
+            expected_holidays = None
         self.assertEqual(holidays, expected_holidays)
 
 
