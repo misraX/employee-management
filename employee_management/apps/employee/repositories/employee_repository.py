@@ -1,7 +1,7 @@
 import uuid
 
 from employee_management.apps.employee.models.employee import Employee
-from employee_management.core.repositories.base_repository import CRUDRepository
+from employee_management.core.repositories.base_repository import CRUDRepository, T
 from employee_management.database.sqlite_database_session import SQLiteDatabaseSession
 from employee_management.utilities.time import TimeUtility
 
@@ -86,3 +86,10 @@ class EmployeeSQLiteRepository(CRUDRepository[Employee]):
             result = employee.fetchone()
         employee = Employee(**result)
         return employee
+
+    def get_all(self) -> list[T] | None:
+        with self._db_session as session:
+            cursor = session.get_cursor()
+            cursor.execute("SELECT * FROM employee")
+            result = cursor.fetchall()
+        return [Employee(**result) for result in result] if result is not None else None

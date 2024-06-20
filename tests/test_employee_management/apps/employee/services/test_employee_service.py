@@ -23,7 +23,7 @@ faker = Faker()
 
 class TestEmployeeService(unittest.TestCase):
     def setUp(self):
-        os.environ["DATABASE_URL"] = ":memory:?cache=shared"
+        os.environ["DATABASE_URL"] = "example.db"
         # Initialize the employee tables
         db_initializer = SQLiteDatabaseInitializer(db_name=config.database_url)
         db_initializer.create_employee_table()
@@ -33,6 +33,10 @@ class TestEmployeeService(unittest.TestCase):
         self.employee_email = faker.email()
         self.employee_salary = faker.pyfloat(min_value=100, max_value=2000)
         self.employee_service = EmployeeService(employee_repository=self.repository)
+
+    def tearDown(self):
+        db_path = config.database_url
+        os.remove(db_path)
 
     def test_add_employee(self):
         employee_id = uuid.uuid4()
@@ -85,7 +89,7 @@ class TestEmployeeService(unittest.TestCase):
     def test_delete_employee(self):
         employee = Employee(
             name=self.employee_name,
-            position="Analyst",
+            position="Software Developer",
             email=self.employee_email,
             salary=self.employee_salary,
         )
@@ -94,6 +98,24 @@ class TestEmployeeService(unittest.TestCase):
         self.employee_service.delete_employee(employee_id=employee.employee_id)
         deleted_employee = self.employee_service.get_employee(employee_id=employee.employee_id)
         self.assertIsNone(deleted_employee)
+
+    def test_list_employees(self):
+        employee = Employee(
+            name=self.employee_name,
+            position="Software Developer",
+            email=self.employee_email,
+            salary=self.employee_salary,
+        )
+        now = "2024-06-20 00:03:42.746949+00:00"
+        with patch.object(TimeUtility, "get_current_time", return_value=now):
+            self.employee_service.add_employee(employee=employee)
+        list_of_employees = self.employee_service.get_all_employees()
+        self.assertEqual(len(list_of_employees), 1)
+        items = []
+        for employee in list_of_employees:
+            items.append(employee.__str__())
+        list_of_employees = self.employee_service.__str__()
+        self.assertEqual(list_of_employees, f"{items}")
 
 
 if __name__ == "__main__":

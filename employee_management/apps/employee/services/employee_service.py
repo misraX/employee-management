@@ -21,3 +21,15 @@ class EmployeeService:
 
     def update_employee(self, employee_id: uuid.UUID, values: dict) -> Employee:
         return self._employee_repository.update(entity_id=employee_id, update=values)
+
+    def get_all_employees(self) -> list[Employee] | None:
+        return self._employee_repository.get_all()
+
+    def __str__(self):
+        employees = self._employee_repository.get_all()
+        if not employees:
+            return ""
+        items = []
+        for employee in employees:
+            items.append(employee.__str__())
+        return f"{items}"

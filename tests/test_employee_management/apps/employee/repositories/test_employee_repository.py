@@ -32,6 +32,10 @@ class TestEmployeeSQLiteRepository(unittest.TestCase):
         self.employee_email = faker.email()
         self.employee_salary = faker.pyfloat(min_value=100, max_value=2000)
 
+    def tearDown(self):
+        db_path = config.database_url
+        os.remove(db_path)
+
     def test_add_employee(self):
         employee_id = uuid.uuid4()
         employee = Employee(
