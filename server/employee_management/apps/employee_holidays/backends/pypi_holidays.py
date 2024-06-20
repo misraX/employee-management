@@ -72,6 +72,8 @@ class PyPiHolidaysBackend(HolidaysBackend):
         """
         Get holidays in the next 7 days if today is Monday.
 
+        This method assumes that Monday is always the start of the week.
+
         :param country: The country code for which to retrieve holidays.
         :param categories: A tuple of categories as strings.
         :param language: The language code (default is 'en_US').
