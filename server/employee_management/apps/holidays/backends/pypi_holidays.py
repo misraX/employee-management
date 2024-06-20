@@ -1,5 +1,5 @@
 from datetime import date, datetime
-from typing import Tuple
+from typing import List, Tuple
 
 from holidays import country_holidays
 
@@ -14,10 +14,10 @@ class PyPiHolidaysBackend(HolidaysBackend):
     def get_holidays(
         self,
         country: str,
-        years: list[datetime.year],
+        years: List[datetime.year],
         categories: Tuple[str],
         language: str = "en_US",
-    ) -> list[tuple[date, str]] | None:
+    ) -> List[tuple[date, str]] | None:
         """
         Get holidays for a given country, years, categories and language.
 
