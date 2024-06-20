@@ -1,4 +1,4 @@
-![Coverage](https://misrax.github.io/employee-management/coverage.svg)
+![Coverage](https://raw.githubusercontent.com/misraX/employee-management/gh-pages/coverage.svg)
 
 # Employee Management
 
