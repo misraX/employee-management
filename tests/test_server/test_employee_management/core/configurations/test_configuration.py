@@ -4,7 +4,7 @@ import unittest
 from server.employee_management.core.configurations.configuration import Configuration
 
 
-class ConfigurationTests(unittest.TestCase):
+class ConfigurationTestCase(unittest.TestCase):
     def setUp(self):
         self.config = Configuration()
 

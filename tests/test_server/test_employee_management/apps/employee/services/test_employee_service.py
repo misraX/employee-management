@@ -21,7 +21,7 @@ config = configuration
 faker = Faker()
 
 
-class TestEmployeeService(unittest.TestCase):
+class EmployeeServiceTestCase(unittest.TestCase):
     def setUp(self):
         os.environ["DATABASE_URL"] = "example.db"
         # Initialize the employee tables

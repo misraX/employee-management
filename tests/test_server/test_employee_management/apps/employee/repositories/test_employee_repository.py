@@ -20,10 +20,9 @@ config = configuration
 faker = Faker()
 
 
-class TestEmployeeSQLiteRepository(unittest.TestCase):
+class EmployeeSQLiteRepositoryTestCase(unittest.TestCase):
     def setUp(self):
         os.environ["DATABASE_URL"] = "example.db"
-        # Initialize the employee tables
         db_initializer = SQLiteDatabaseInitializer(db_name=config.database_url)
         db_initializer.create_employee_table()
         self.repository = EmployeeSQLiteRepository()
