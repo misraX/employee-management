@@ -42,7 +42,7 @@ jobs:
         run: pipenv install --dev coverage-badge
 
       - name: Generate coverage badge
-        run: coverage-badge -o coverage.svg
+        run: pipenv run coverage-badge -o coverage.svg
 
       - name: Deploy to GitHub Pages
         run: |
