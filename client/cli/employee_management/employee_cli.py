@@ -1,7 +1,7 @@
 import uuid
 from typing import Dict, List
 
-from client.cli.employee_management.employee_utils import EmployeeUtils
+from client.cli.employee_management.employee_model import EmployeeModel
 from employee_management.apps.employee.models.employee import Employee
 from employee_management.apps.employee.services.employee_service import EmployeeService
 
@@ -15,7 +15,7 @@ class EmployeeCLI:
     interacts with the EmployeeService class.
     """
 
-    def __init__(self, service: EmployeeService, utils: EmployeeUtils):
+    def __init__(self, service: EmployeeService, utils: EmployeeModel):
         self.service = service
         self.utils = utils
 

@@ -4,10 +4,10 @@ from client.cli.employee_management.timezone_utils import TimezoneUtils
 from employee_management.apps.employee.models.employee import Employee
 
 
-class EmployeeUtils:
+class EmployeeModel:
     """
-    A utility class to manage employee, it's used to serialize the employee
-    based on read/write operations.
+    A model class to serialize the employee, it's used to serialize the employee
+    based on read/write operations for the CLI
     """
 
     def __init__(self, timezone_utils: TimezoneUtils):

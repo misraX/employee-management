@@ -3,7 +3,7 @@ import json
 import click
 
 from client.cli.employee_management.employee_cli import EmployeeCLI
-from client.cli.employee_management.employee_utils import EmployeeUtils
+from client.cli.employee_management.employee_model import EmployeeModel
 from client.cli.employee_management.timezone_utils import TimezoneUtils
 from employee_management.apps.employee.repositories.employee_repository import (
     EmployeeSQLiteRepository,
@@ -11,7 +11,7 @@ from employee_management.apps.employee.repositories.employee_repository import (
 from employee_management.apps.employee.services.employee_service import EmployeeService
 
 timezone_utils = TimezoneUtils()
-employee_utils = EmployeeUtils(timezone_utils)
+employee_utils = EmployeeModel(timezone_utils)
 employee_repository = EmployeeSQLiteRepository()
 employee_service = EmployeeService(employee_repository=employee_repository)
 employee_cli = EmployeeCLI(employee_service, employee_utils)
