@@ -10,11 +10,14 @@ class EmployeeService:
     def __init__(self, employee_repository: EmployeeSQLiteRepository = EmployeeSQLiteRepository):
         self._employee_repository = employee_repository
 
-    def get_employee_by_id(self, employee_id: uuid.UUID) -> Employee | None:
+    def add_employee(self, employee: Employee) -> Employee:
+        return self._employee_repository.add(employee)
+
+    def get_employee(self, employee_id: uuid.UUID) -> Employee | None:
         return self._employee_repository.get(entity_id=employee_id)
 
-    def delete_employee_by_id(self, employee_id: uuid.UUID) -> None:
+    def delete_employee(self, employee_id: uuid.UUID) -> None:
         return self._employee_repository.delete(entity_id=employee_id)
 
-    def update_employee_by_id(self, employee_id: uuid.UUID, values: dict) -> Employee:
+    def update_employee(self, employee_id: uuid.UUID, values: dict) -> Employee:
         return self._employee_repository.update(entity_id=employee_id, update=values)
