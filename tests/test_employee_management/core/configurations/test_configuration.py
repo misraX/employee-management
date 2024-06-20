@@ -1,7 +1,7 @@
 import os
 import unittest
 
-from employee_management_system.core.configurations.configuration import Configuration
+from employee_management.core.configurations.configuration import Configuration
 
 
 class ConfigurationTests(unittest.TestCase):
@@ -13,7 +13,7 @@ class ConfigurationTests(unittest.TestCase):
         self.assertEqual(self.config.database_url, ":memory:")
 
     def test_configuration_database_name_from_path(self):
-        os.environ["DATABASE_URL"] = "employee_management_system.db"
+        os.environ["DATABASE_URL"] = "employee_management.db"
         self.assertEqual(
             self.config.database_url,
             os.path.join(self.config.base_dir, os.environ.get("DATABASE_URL")),

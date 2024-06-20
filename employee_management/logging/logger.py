@@ -1,6 +1,6 @@
 import logging
 
-from employee_management_system.core.configurations.configuration import configuration
+from employee_management.core.configurations.configuration import configuration
 
 logging_format = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
 logging.basicConfig(level=configuration.logging_level, format=logging_format)

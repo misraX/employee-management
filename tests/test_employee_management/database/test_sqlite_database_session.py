@@ -3,9 +3,9 @@ import sqlite3
 import unittest
 from unittest.mock import Mock, patch
 
-from employee_management_system.core.configurations.configuration import configuration
-from employee_management_system.database.sqlite_database_session import SQLiteDatabaseSession
-from employee_management_system.exceptions.sqlite_database import (
+from employee_management.core.configurations.configuration import configuration
+from employee_management.database.sqlite_database_session import SQLiteDatabaseSession
+from employee_management.exceptions.sqlite_database import (
     DatabaseConnectionError,
     DatabaseOperationError,
 )

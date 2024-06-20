@@ -4,8 +4,8 @@ from typing import Final
 from unittest import TestCase
 from uuid import UUID
 
-from employee_management_system.core.repositories.base_repository import CRUDRepository, T
-from employee_management_system.exceptions.immutable import ImmutableAttributeError
+from employee_management.core.repositories.base_repository import CRUDRepository, T
+from employee_management.exceptions.immutable import ImmutableAttributeError
 
 
 class Entity:

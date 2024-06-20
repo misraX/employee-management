@@ -2,9 +2,9 @@ import uuid
 from datetime import datetime
 from typing import Final
 
-from employee_management_system.exceptions.immutable import ImmutableAttributeError
-from employee_management_system.utilities.time import TimeUtility
-from employee_management_system.validators.email import EmailValidator
+from employee_management.exceptions.immutable import ImmutableAttributeError
+from employee_management.utilities.time import TimeUtility
+from employee_management.validators.email import EmailValidator
 
 
 class Employee:

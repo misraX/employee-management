@@ -1,6 +1,6 @@
 from email_validator import validate_email
 
-from employee_management_system.exceptions.email import EmailValidationException
+from employee_management.exceptions.email import EmailValidationException
 
 
 class EmailValidator:

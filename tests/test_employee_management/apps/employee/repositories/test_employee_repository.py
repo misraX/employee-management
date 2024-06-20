@@ -5,16 +5,16 @@ from unittest.mock import patch
 
 from faker import Faker
 
-from employee_management_system.apps.employee.models.employee import Employee
-from employee_management_system.apps.employee.repositories.employee_repository import (
+from employee_management.apps.employee.models.employee import Employee
+from employee_management.apps.employee.repositories.employee_repository import (
     EmployeeSQLiteRepository,
 )
-from employee_management_system.core.configurations.configuration import configuration
-from employee_management_system.database.sqlite_database_initializer import (
+from employee_management.core.configurations.configuration import configuration
+from employee_management.database.sqlite_database_initializer import (
     SQLiteDatabaseInitializer,
 )
-from employee_management_system.database.sqlite_database_session import SQLiteDatabaseSession
-from employee_management_system.utilities.time import TimeUtility
+from employee_management.database.sqlite_database_session import SQLiteDatabaseSession
+from employee_management.utilities.time import TimeUtility
 
 config = configuration
 faker = Faker()

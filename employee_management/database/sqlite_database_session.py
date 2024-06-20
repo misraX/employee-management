@@ -1,13 +1,13 @@
 import sqlite3
 
-from employee_management_system.core.configurations.configuration import configuration
-from employee_management_system.core.database.sql_session import SQLSession
-from employee_management_system.exceptions.sqlite_database import (
+from employee_management.core.configurations.configuration import configuration
+from employee_management.core.database.sql_session import SQLSession
+from employee_management.exceptions.sqlite_database import (
     DatabaseConnectionError,
     DatabaseOperationError,
 )
-from employee_management_system.logging.logger import format_logger_name
-from employee_management_system.logging.logger import logger as logging
+from employee_management.logging.logger import format_logger_name
+from employee_management.logging.logger import logger as logging
 
 logger = logging.getLogger(format_logger_name("sqlite_database_session"))
 

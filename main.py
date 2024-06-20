@@ -1,11 +1,11 @@
 import os
 
-from employee_management_system.core.configurations.configuration import configuration
-from employee_management_system.database.sqlite_database_initializer import (
+from employee_management.core.configurations.configuration import configuration
+from employee_management.database.sqlite_database_initializer import (
     SQLiteDatabaseInitializer,
 )
-from employee_management_system.logging.logger import format_logger_name
-from employee_management_system.logging.logger import logger as logging
+from employee_management.logging.logger import format_logger_name
+from employee_management.logging.logger import logger as logging
 
 logger = logging.getLogger(format_logger_name(configuration.app_name))
 
