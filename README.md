@@ -2,10 +2,17 @@
 <h1 align="center">Employee Management</h1>
 <p align="center">A simple Employee Database Management System using OOP</p>
 
-![Coverage](https://raw.githubusercontent.com/misraX/employee-management/gh-pages/coverage.svg)
-[![Python Tests](https://github.com/misraX/employee-management/actions/workflows/test.yml/badge.svg)](https://github.com/misraX/employee-management/actions/workflows/test.yml)
-[![Lint](https://github.com/misraX/employee-management/actions/workflows/lint.yml/badge.svg)](https://github.com/misraX/employee-management/actions/workflows/lint.yml)
-
+<p align="center">
+  <a href="https://raw.githubusercontent.com/misraX/employee-management/gh-pages/coverage.svg">
+    <img src="https://raw.githubusercontent.com/misraX/employee-management/gh-pages/coverage.svg" alt="Coverage">
+  </a>
+  <a href="https://github.com/misraX/employee-management/actions/workflows/test.yml">
+    <img src="https://github.com/misraX/employee-management/actions/workflows/test.yml/badge.svg" alt="Python Tests">
+  </a>
+  <a href="https://github.com/misraX/employee-management/actions/workflows/lint.yml">
+    <img src="https://github.com/misraX/employee-management/actions/workflows/lint.yml/badge.svg" alt="Lint">
+  </a>
+</p>
 ## Packaging
 
 ```text
