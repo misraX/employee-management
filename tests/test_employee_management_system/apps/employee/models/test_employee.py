@@ -8,15 +8,15 @@ from employee_management_system.exceptions.email import EmailValidationException
 from employee_management_system.exceptions.immutable import ImmutableAttributeError
 from employee_management_system.utilities.time import TimeUtility
 
-fake = Faker()
+faker = Faker()
 
 
 class EmployeeModelTestCase(TestCase):
     def setUp(self):
         self.current_time = TimeUtility.get_current_time()
-        self.employee_name = fake.name()
-        self.employee_email = fake.email()
-        self.employee_salary = fake.pyfloat(min_value=100, max_value=2000)
+        self.employee_name = faker.name()
+        self.employee_email = faker.email()
+        self.employee_salary = faker.pyfloat(min_value=100, max_value=2000)
         self.employee_invalid_email = "invalid-email"
         self.employee = Employee(
             name=self.employee_name,
@@ -52,25 +52,25 @@ class EmployeeModelTestCase(TestCase):
 
     def test_immutable_employee_name(self):
         with self.assertRaises(ImmutableAttributeError) as exception:
-            self.employee.name = fake.name()
+            self.employee.name = faker.name()
 
         self.assertEqual(str(exception.exception), "Cannot modify the name attribute.")
 
     def test_immutable_employee_email(self):
         with self.assertRaises(ImmutableAttributeError) as exception:
-            self.employee.email = fake.email()
+            self.employee.email = faker.email()
 
         self.assertEqual(str(exception.exception), "Cannot modify the email attribute.")
 
     def test_immutable_employee_salary(self):
         with self.assertRaises(ImmutableAttributeError) as exception:
-            self.employee.salary = fake.pyfloat(min_value=100, max_value=2000)
+            self.employee.salary = faker.pyfloat(min_value=100, max_value=2000)
 
         self.assertEqual(str(exception.exception), "Cannot modify the salary attribute.")
 
     def test_immutable_employee_position(self):
         with self.assertRaises(ImmutableAttributeError) as exception:
-            self.employee.position = fake.word()
+            self.employee.position = faker.word()
 
         self.assertEqual(str(exception.exception), "Cannot modify the position attribute.")
 

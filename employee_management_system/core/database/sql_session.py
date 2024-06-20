@@ -2,6 +2,10 @@ import abc
 
 
 class SQLSession(abc.ABC):
+    """
+    A base interface for all SQL database sessions managers
+    """
+
     @abc.abstractmethod
     def open(self) -> None:
         """

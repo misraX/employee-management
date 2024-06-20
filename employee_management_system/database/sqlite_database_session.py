@@ -26,6 +26,7 @@ class SQLiteDatabaseSession(SQLSession):
         """
         try:
             self._connection = sqlite3.connect(self._db_name)
+            self._connection.row_factory = sqlite3.Row
             self._cursor = self._connection.cursor()
             logger.info(f"Database connection opened: {self._db_name}")
         except sqlite3.Error as e:

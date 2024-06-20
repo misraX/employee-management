@@ -1,7 +1,9 @@
+import uuid
 from datetime import datetime
 from typing import Final
 
 from employee_management_system.exceptions.immutable import ImmutableAttributeError
+from employee_management_system.utilities.time import TimeUtility
 from employee_management_system.validators.email import EmailValidator
 
 
@@ -19,15 +21,21 @@ class Employee:
         salary: float,
         position: str,
         email: str,
-        created_at: datetime,
-        updated_at: datetime,
+        created_at: datetime | None = None,
+        updated_at: datetime | None = None,
+        entity_id: uuid.UUID | None = None,
     ):
         self._name: Final[str] = name
         self._salary: Final[float] = salary
         self._position: Final[str] = position
         self._email: Final[str] = EmailValidator.email(email)
-        self._created_at: Final[datetime] = created_at
-        self._updated_at: Final[datetime] = updated_at
+        self._created_at: Final[datetime] = (
+            created_at if created_at else TimeUtility.get_current_time()
+        )
+        self._updated_at: Final[datetime] = (
+            updated_at if updated_at else TimeUtility.get_current_time()
+        )
+        self._id: Final[uuid.UUID] = entity_id if entity_id else uuid.uuid4()
 
     @property
     def name(self) -> str:
@@ -77,8 +85,13 @@ class Employee:
     def updated_at(self, updated_at: datetime):
         raise ImmutableAttributeError("Cannot modify the updated_at attribute.")
 
+    @property
+    def entity_id(self) -> uuid.UUID:
+        return self._id
+
     def __str__(self):
         return (
-            f"Employee {self.name} - salary {self.salary} - position {self.position}"
-            f"- email {self.email} - created at {self.created_at} - updated at {self.updated_at}"
+            f"Employee: <{self.entity_id}> {self.name} - salary {self.salary} "
+            f"- position {self.position} - email {self.email} - created at {self.created_at}"
+            f"- updated at {self.updated_at}"
         )
