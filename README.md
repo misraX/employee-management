@@ -48,6 +48,7 @@ server/
     ├── exceptions/ # Project custom Exceptions like EmailValidationException, and ImmutableAttributeError
     ├── logging/ # Project logging <logger>
     ├── notifications/ # Notifications like NotifyByEmail
+    ├── scheduler/ # Celery beat or crontabs
     ├── utilities/ # Project utilities like TimeUtility
     └── validators/ # Project Validators like EmailValidator
 
