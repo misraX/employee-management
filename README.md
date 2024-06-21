@@ -185,6 +185,7 @@ All the below commands can run inside the docker containers by pre-appending `do
         "position": "Software Developer",
         "email": "maysra@gmail.com",
         "employee_id": "47470cce-f2e7-41ef-b891-4afec06b87f1",
+        "country": "EG",
         "created_at": "2024-06-20 23:28:16.142435-0400",
         "updated_at": "2024-06-20 23:28:16.142435-0400"
     }
