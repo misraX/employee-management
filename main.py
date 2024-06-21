@@ -4,17 +4,27 @@ import click
 
 from client.employee_management.cli.employee_cli import EmployeeCLI
 from client.employee_management.models.employee_model import EmployeeModel
+from client.employee_management.models.holidays_model import HolidaysModel
 from client.employee_management.utilities.timezone_utils import TimezoneUtils
 from server.employee_management.apps.employee.repositories.employee_repository import (
     EmployeeSQLiteRepository,
 )
 from server.employee_management.apps.employee.services.employee_service import EmployeeService
+from server.employee_management.apps.employee_holidays.backends.pypi_holidays import (
+    PyPiHolidaysBackend,
+)
 
 timezone_utils = TimezoneUtils()
-employee_utils = EmployeeModel(timezone_utils)
+employee_model = EmployeeModel(timezone_utils=timezone_utils)
+holiday_model = HolidaysModel()
 employee_repository = EmployeeSQLiteRepository()
-employee_service = EmployeeService(employee_repository=employee_repository)
-employee_cli = EmployeeCLI(employee_service, employee_utils)
+holidays_backend = PyPiHolidaysBackend()
+employee_service = EmployeeService(
+    employee_repository=employee_repository, holidays_backend=holidays_backend
+)
+employee_cli = EmployeeCLI(
+    service=employee_service, employee_model=employee_model, holidays_model=holiday_model
+)
 
 
 @click.group()
@@ -30,7 +40,10 @@ def add():
     salary = click.prompt("Please enter the employee salary", type=float)
     position = click.prompt("Please enter the employee position")
     email = click.prompt("Please enter the employee email")
-    added_employee = employee_cli.add_employee(name, salary, position, email)
+    country = click.prompt("Please enter the employee country code")
+    added_employee = employee_cli.add_employee(
+        name=name, salary=salary, position=position, email=email, country=country
+    )
     click.echo("✨ Employee added successfully! ✨")
     click.echo(json.dumps(added_employee, indent=4))
 
@@ -71,6 +84,8 @@ def update(employee_id):
         updates["position"] = click.prompt("Please enter the new position", type=str)
     if click.confirm("Do you want to update the email?"):
         updates["email"] = click.prompt("Please enter the new email", type=str)
+    if click.confirm("Do you want to update the country?"):
+        updates["country"] = click.prompt("Please enter the new country", type=str)
 
     if not updates.keys():
         click.echo("🚫 Oops! Nothing to update!")
@@ -81,6 +96,15 @@ def update(employee_id):
         click.echo(json.dumps(updated_employee, indent=4))
     except ValueError as exc:
         click.echo(f"❌ {exc.__str__()} ❌")
+
+
+@cli.command()
+@click.argument("employee_id")
+def get_current_employee_holiday(employee_id):
+    """Get the current week public holidays 🍹"""
+    holidays = employee_cli.get_employee_current_holiday(employee_id=employee_id)
+    click.echo("🍹 List of employee's current week holidays")
+    click.echo(json.dumps(holidays, indent=4))
 
 
 @cli.command()

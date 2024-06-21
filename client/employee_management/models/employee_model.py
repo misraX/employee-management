@@ -13,7 +13,7 @@ class EmployeeModel:
     def __init__(self, timezone_utils: TimezoneUtils):
         self.timezone_utils = timezone_utils
 
-    def employee_to_dict(self, employee: Employee, read: bool = True) -> Dict[str, str]:
+    def to_dict(self, employee: Employee, read: bool = True) -> Dict[str, str]:
         """
         Convert an Employee object to a dictionary.
 
@@ -28,6 +28,7 @@ class EmployeeModel:
                 "salary": employee.salary,
                 "position": employee.position,
                 "email": employee.email,
+                "country": employee.country,
             }
         )
         if read:

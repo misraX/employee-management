@@ -48,9 +48,9 @@ class EmployeeSQLiteRepository(CRUDRepository[Employee]):
             cursor.execute(
                 """
                   INSERT INTO employee (
-                  employee_id, name, position, email, salary, created_at, updated_at
+                  employee_id, name, position, email, salary, country ,created_at, updated_at
                   )
-                  VALUES (?, ?, ?, ?, ?, ?, ?)
+                  VALUES (?, ?, ?, ?, ?, ? ,?, ?)
               """,
                 (
                     str(entity.employee_id),
@@ -58,6 +58,7 @@ class EmployeeSQLiteRepository(CRUDRepository[Employee]):
                     entity.position,
                     entity.email,
                     entity.salary,
+                    entity.country,
                     str(now),
                     str(now),
                 ),

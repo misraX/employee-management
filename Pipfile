@@ -9,6 +9,9 @@ email-validator = "*"
 python-dotenv = "*"
 pytz = "*"
 click = "*"
+holidays = "*"
+celery = "*"
+redis = "*"
 
 [dev-packages]
 conventional-pre-commit = "*"

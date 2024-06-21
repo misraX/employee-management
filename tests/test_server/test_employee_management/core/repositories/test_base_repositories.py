@@ -50,7 +50,7 @@ class EntityRepository(CRUDRepository[Entity]):
         return self._entities
 
 
-class TestCRUDRepository(TestCase):
+class CRUDRepositoryTestCase(TestCase):
     def setUp(self):
         self.repository = EntityRepository()
         self.entity = Entity("test")

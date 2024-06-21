@@ -45,6 +45,26 @@ class Configuration:
         """
         return os.getenv("APP_NAME")
 
+    @property
+    def smtp_server(self) -> str:
+        return os.getenv("SMTP_SERVER")
+
+    @property
+    def smtp_port(self) -> int:
+        return int(os.getenv("SMTP_PORT"))
+
+    @property
+    def smtp_user(self) -> str:
+        return os.getenv("SMTP_USER")
+
+    @property
+    def smtp_password(self) -> str:
+        return os.getenv("SMTP_PASSWORD")
+
+    @property
+    def celery_broker_url(self) -> str:
+        return os.getenv("CELERY_BROKER_URL")
+
 
 @lru_cache
 def get_configuration() -> Configuration:

@@ -162,6 +162,5 @@ cython_debug/
 
 
 # employee_management sqlite
-
-employee_management.sqlite3
+*.sqlite3
 *.db

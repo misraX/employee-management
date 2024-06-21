@@ -21,7 +21,7 @@ config = configuration
 faker = Faker()
 
 
-class TestEmployeeService(unittest.TestCase):
+class EmployeeServiceTestCase(unittest.TestCase):
     def setUp(self):
         os.environ["DATABASE_URL"] = "example.db"
         # Initialize the employee tables
@@ -46,6 +46,7 @@ class TestEmployeeService(unittest.TestCase):
             position="Software Engineer",
             email=self.employee_email,
             salary=self.employee_salary,
+            country="US",
         )
         now = "2024-06-20 00:03:42.746949+00:00"
         with patch.object(TimeUtility, "get_current_time", return_value=now):
@@ -73,6 +74,7 @@ class TestEmployeeService(unittest.TestCase):
             position="Software Engineer",
             email=self.employee_email,
             salary=self.employee_salary,
+            country="US",
         )
         now = "2024-06-20 00:03:42.746949+00:00"
         with patch.object(TimeUtility, "get_current_time", return_value=now):
@@ -92,6 +94,7 @@ class TestEmployeeService(unittest.TestCase):
             position="Software Developer",
             email=self.employee_email,
             salary=self.employee_salary,
+            country="US",
         )
         self.employee_service.add_employee(employee=employee)
 
@@ -105,6 +108,7 @@ class TestEmployeeService(unittest.TestCase):
             position="Software Developer",
             email=self.employee_email,
             salary=self.employee_salary,
+            country="US",
         )
         now = "2024-06-20 00:03:42.746949+00:00"
         with patch.object(TimeUtility, "get_current_time", return_value=now):

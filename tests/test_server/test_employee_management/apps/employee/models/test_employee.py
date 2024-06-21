@@ -4,6 +4,7 @@ from unittest import TestCase
 from faker import Faker
 
 from server.employee_management.apps.employee.models.employee import Employee
+from server.employee_management.exceptions.country import CountryValidationError
 from server.employee_management.exceptions.email import EmailValidationException
 from server.employee_management.exceptions.immutable import ImmutableAttributeError
 from server.employee_management.utilities.time import TimeUtility
@@ -24,6 +25,7 @@ class EmployeeModelTestCase(TestCase):
             salary=self.employee_salary,
             created_at=self.current_time,
             updated_at=self.current_time,
+            country="EG",
             position="Software Developer",
         )
 
@@ -43,12 +45,27 @@ class EmployeeModelTestCase(TestCase):
                 created_at=self.current_time,
                 updated_at=self.current_time,
                 position="Software Developer",
+                country="US",
             )
 
         self.assertEqual(
             str(exception.exception),
             "An email address must have an @-sign.",
         )
+
+    def test_invalid_country(self):
+        with self.assertRaises(CountryValidationError) as exception:
+            Employee(
+                name=self.employee_name,
+                email=self.employee_email,
+                salary=self.employee_salary,
+                created_at=self.current_time,
+                updated_at=self.current_time,
+                position="Software Developer",
+                country="DUMP",
+            )
+
+        self.assertEqual(str(exception.exception), "Invalid Country Code.")
 
     def test_immutable_employee_name(self):
         with self.assertRaises(ImmutableAttributeError) as exception:

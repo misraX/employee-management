@@ -28,7 +28,7 @@ class SQLiteDatabaseSession(SQLSession):
             self._connection = sqlite3.connect(self._db_name)
             self._connection.row_factory = sqlite3.Row
             self._cursor = self._connection.cursor()
-            logger.info(f"Database connection opened: {self._db_name}")
+            logger.debug(f"Database connection opened: {self._db_name}")
         except sqlite3.Error as e:
             logger.error(f"Error opening database connection: {e}")
             raise DatabaseConnectionError(f"Failed to open database connection: {e}") from e
@@ -41,14 +41,14 @@ class SQLiteDatabaseSession(SQLSession):
         try:
             if self._cursor:
                 self._cursor.close()
-                logger.info("Database cursor closed")
+                logger.debug("Database cursor closed")
         except sqlite3.Error as e:
             logger.error(f"Error closing cursor: {e}")
             raise DatabaseOperationError(f"Failed to close cursor: {e}") from e
         try:
             if self._connection:
                 self._connection.close()
-                logger.info("Database connection closed")
+                logger.debug("Database connection closed")
         except sqlite3.Error as e:
             logger.error(f"Error closing connection: {e}")
             raise DatabaseOperationError(f"Failed to close connection: {e}") from e
@@ -62,7 +62,7 @@ class SQLiteDatabaseSession(SQLSession):
             raise DatabaseConnectionError("Database session is not open. Call 'open' first.")
         try:
             self._connection.commit()
-            logger.info("Database changes committed")
+            logger.debug("Database changes committed")
         except sqlite3.Error as e:
             logger.error(f"Error committing changes: {e}")
             raise DatabaseOperationError(f"Failed to commit changes: {e}") from e
@@ -76,7 +76,7 @@ class SQLiteDatabaseSession(SQLSession):
             raise DatabaseConnectionError("Database session is not open. Call 'open' first.")
         try:
             self._connection.rollback()
-            logger.info("Database changes rolled back")
+            logger.debug("Database changes rolled back")
         except sqlite3.Error as e:
             logger.error(f"Error rolling back changes: {e}")
             raise DatabaseOperationError(f"Failed to rollback changes: {e}") from e

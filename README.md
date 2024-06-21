@@ -1,6 +1,5 @@
 
 <h1 style="text-align: center">Employee Management</h1>
-<p style="text-align: center">A simple Employee Database Management System</p>
 
 <p style="text-align: center">
   <a href="https://raw.githubusercontent.com/misraX/employee-management/gh-pages/coverage.svg">
@@ -30,6 +29,14 @@ This approach can be easily transformed to support different types of interfaces
 2. **Loose Coupling**: The services are loosely coupled, using underlying repositories, which allows for easy adjustments and adaptations to different serializers.
 3. **Data Transformation**: The client handles data transformation, such as date and time conversion, to ensure compatibility with the local environment.
 4. **Scalability**: The server-client architecture allows for easy scaling and expansion of the system, as the client can be adapted to different types of interfaces (web, mobile, etc.) while consuming the same server-side services.
+5. **Schedulers**: Using celery and celery beat with a redis broker to handle recurring email notification or async operation
+
+## Installation
+
+```shell
+docker compose up -d # Build and run docker compose
+docker compose exec cli bash -c "python miscellaneous/build_tools/db.py" # Run The DB migrations
+```
 
 ## Packaging
 
@@ -48,6 +55,8 @@ server/
     ├── database/ # The DB manager, like sessions, different drivers
     ├── exceptions/ # Project custom Exceptions like EmailValidationException, and ImmutableAttributeError
     ├── logging/ # Project logging <logger>
+    ├── notifications/ # Notifications like NotifyByEmail
+    ├── scheduler/ # Celery beat or crontabs
     ├── utilities/ # Project utilities like TimeUtility
     └── validators/ # Project Validators like EmailValidator
 
@@ -121,14 +130,17 @@ Options:
   --help  Show this message and exit.
 
 Commands:
-  add     Add a new employee ✨
-  delete  Delete an employee by ID 🗑️
-  get     Get an employee by ID 🔍
-  list    List all employees 📋
-  update  Update an existing employee ✨
+  add                           Add a new employee ✨
+  delete                        Delete an employee by ID 🗑️
+  get                           Get an employee by ID 🔍
+  get-current-employee-holiday  Get the current week public holidays 🍹
+  list                          List all employees 📋
+  update                        Update an existing employee ✨
 ```
 
 ### Example Commands
+
+All the below commands can run inside the docker containers by pre-appending `docker compose exec cli`
 
 - **Add a new employee [Prompt] 🚀:**
     ```sh
@@ -154,3 +166,52 @@ Commands:
     ```sh
     python main.py list
     ```
+
+- **Get current employee's holidays:**
+    ```sh
+    python main.py get-current-employee-holiday "employee_id"
+    ```
+
+
+### Example outputs
+
+- **List all employees:**
+```text
+📋 List of employees:
+[
+    {
+        "name": "Maysra Gamal",
+        "salary": 11111.0,
+        "position": "Software Developer",
+        "email": "maysra@gmail.com",
+        "employee_id": "47470cce-f2e7-41ef-b891-4afec06b87f1",
+        "created_at": "2024-06-20 23:28:16.142435-0400",
+        "updated_at": "2024-06-20 23:28:16.142435-0400"
+    }
+]
+
+```
+
+- **Get an employee by ID**
+```text
+🔍 Employee found:
+{
+    "name": "Maysra Gamal",
+    "salary": 11111.0,
+    "position": "Software Developer",
+    "email": "maysra@gmail.com",
+    "employee_id": "47470cce-f2e7-41ef-b891-4afec06b87f1",
+    "country": "EG",
+    "created_at": "2024-06-20 23:28:16.142435-0400",
+    "updated_at": "2024-06-20 23:28:16.142435-0400"
+}
+```
+
+- **Get current employee's holidays:**
+```text
+🍹 List of employee's current week holidays
+{
+    "date": "2024-06-18",
+    "holiday": "Eid al-Adha Holiday (estimated)"
+}
+```
