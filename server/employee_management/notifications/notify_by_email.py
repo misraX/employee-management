@@ -40,7 +40,7 @@ class NotifyByEmail(Notify):
         :param smtp_user (str): The SMTP server username.
         :param smtp_password (str): The SMTP server password.
         """
-        super().__init__(message)
+        self.message = message
         self.to_email = to_email
         self.from_email = from_email
         self.subject = subject
