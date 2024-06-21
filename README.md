@@ -140,6 +140,8 @@ Commands:
 
 ### Example Commands
 
+All the below commands can run inside the docker containers by pre-appending `docker compose exec cli`
+
 - **Add a new employee [Prompt] 🚀:**
     ```sh
     python main.py add
@@ -169,3 +171,47 @@ Commands:
     ```sh
     python main.py get-current-employee-holiday "employee_id"
     ```
+
+
+### Example outputs
+
+- **List all employees:**
+```text
+📋 List of employees:
+[
+    {
+        "name": "Maysra Gamal",
+        "salary": 11111.0,
+        "position": "Software Developer",
+        "email": "maysra@gmail.com",
+        "employee_id": "47470cce-f2e7-41ef-b891-4afec06b87f1",
+        "created_at": "2024-06-20 23:28:16.142435-0400",
+        "updated_at": "2024-06-20 23:28:16.142435-0400"
+    }
+]
+
+```
+
+- **Get an employee by ID**
+```text
+🔍 Employee found:
+{
+    "name": "Maysra Gamal",
+    "salary": 11111.0,
+    "position": "Software Developer",
+    "email": "maysra@gmail.com",
+    "employee_id": "47470cce-f2e7-41ef-b891-4afec06b87f1",
+    "country": "EG",
+    "created_at": "2024-06-20 23:28:16.142435-0400",
+    "updated_at": "2024-06-20 23:28:16.142435-0400"
+}
+```
+
+- **Get current employee's holidays:**
+```text
+🍹 List of employee's current week holidays
+{
+    "date": "2024-06-18",
+    "holiday": "Eid al-Adha Holiday (estimated)"
+}
+```

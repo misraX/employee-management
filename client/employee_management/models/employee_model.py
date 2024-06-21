@@ -28,6 +28,7 @@ class EmployeeModel:
                 "salary": employee.salary,
                 "position": employee.position,
                 "email": employee.email,
+                "country": employee.country,
             }
         )
         if read:
