@@ -29,7 +29,7 @@ This approach can be easily transformed to support different types of interfaces
 2. **Loose Coupling**: The services are loosely coupled, using underlying repositories, which allows for easy adjustments and adaptations to different serializers.
 3. **Data Transformation**: The client handles data transformation, such as date and time conversion, to ensure compatibility with the local environment.
 4. **Scalability**: The server-client architecture allows for easy scaling and expansion of the system, as the client can be adapted to different types of interfaces (web, mobile, etc.) while consuming the same server-side services.
-
+5. **Schedulers**: Using celery and celery beat with a redis broker to handle recurring email notification or async operation
 
 ## Installation
 
