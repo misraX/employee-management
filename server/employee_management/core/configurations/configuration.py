@@ -61,6 +61,10 @@ class Configuration:
     def smtp_password(self) -> str:
         return os.getenv("SMTP_PASSWORD")
 
+    @property
+    def celery_broker_url(self) -> str:
+        return os.getenv("CELERY_BROKER_URL")
+
 
 @lru_cache
 def get_configuration() -> Configuration:

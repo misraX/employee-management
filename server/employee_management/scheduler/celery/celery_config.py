@@ -1,8 +1,12 @@
 from celery import Celery
 from celery.schedules import crontab
 
+from server.employee_management.core.configurations.configuration import configuration
+
 app = Celery(
-    "email_notifier", broker="redis://localhost:6379/0", backend="redis://localhost:6379/0"
+    "email_notifier",
+    broker=configuration.celery_broker_url,
+    backend=configuration.celery_broker_url,
 )
 
 app.conf.update(
