@@ -14,11 +14,7 @@ app.conf.update(
     beat_schedule={
         "send-employee-holidays-email-every-monday": {
             "task": "server.employee_management.scheduler.celery.tasks.employee_upcoming_holidays",
-            "schedule": crontab(),
-        },
-        "dummy-task": {
-            "task": "server.employee_management.scheduler.celery.tasks.dummy",
-            "schedule": crontab(),
+            "schedule": crontab(minute="0", hour="0", day_of_week="monday"),  # Monday
         },
     },
 )
