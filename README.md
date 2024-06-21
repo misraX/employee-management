@@ -121,11 +121,12 @@ Options:
   --help  Show this message and exit.
 
 Commands:
-  add     Add a new employee ✨
-  delete  Delete an employee by ID 🗑️
-  get     Get an employee by ID 🔍
-  list    List all employees 📋
-  update  Update an existing employee ✨
+  add                           Add a new employee ✨
+  delete                        Delete an employee by ID 🗑️
+  get                           Get an employee by ID 🔍
+  get-current-employee-holiday  Get the current week public holidays 🍹
+  list                          List all employees 📋
+  update                        Update an existing employee ✨
 ```
 
 ### Example Commands
@@ -153,4 +154,9 @@ Commands:
 - **List all employees:**
     ```sh
     python main.py list
+    ```
+
+- **Get current employee's holidays:**
+    ```sh
+    python main.py get-current-employee-holiday "employee_id"
     ```
