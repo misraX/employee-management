@@ -4,6 +4,7 @@ from typing import Final
 
 from server.employee_management.exceptions.immutable import ImmutableAttributeError
 from server.employee_management.utilities.time import TimeUtility
+from server.employee_management.validators.country import CountryValidator
 from server.employee_management.validators.email import EmailValidator
 
 
@@ -21,15 +22,15 @@ class Employee:
         salary: float,
         position: str,
         email: str,
+        country: str,
         created_at: datetime | None = None,
         updated_at: datetime | None = None,
         employee_id: uuid.UUID | None = None,
-        country: str | None = None,
     ):
         self._name: Final[str] = name
         self._salary: Final[float] = salary
         self._position: Final[str] = position
-        self._email: Final[str] = EmailValidator.email(email)
+        self._email: Final[str] = EmailValidator(value=email).validate().value
         self._created_at: Final[datetime] = (
             created_at if created_at else TimeUtility.get_current_time()
         )
@@ -37,7 +38,7 @@ class Employee:
             updated_at if updated_at else TimeUtility.get_current_time()
         )
         self._employee_id: Final[uuid.UUID] = employee_id if employee_id else uuid.uuid4()
-        self._country: Final[str] = country
+        self._country: Final[str] = CountryValidator(value=country).validate().value
 
     @property
     def name(self) -> str:

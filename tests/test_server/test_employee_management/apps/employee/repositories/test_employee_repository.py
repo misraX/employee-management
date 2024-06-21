@@ -43,6 +43,7 @@ class EmployeeSQLiteRepositoryTestCase(unittest.TestCase):
             position="Software Engineer",
             email=self.employee_email,
             salary=self.employee_salary,
+            country="US",
         )
         now = "2024-06-20 00:03:42.746949+00:00"
         with patch.object(TimeUtility, "get_current_time", return_value=now):
@@ -70,6 +71,7 @@ class EmployeeSQLiteRepositoryTestCase(unittest.TestCase):
             position="Software Engineer",
             email=self.employee_email,
             salary=self.employee_salary,
+            country="US",
         )
         now = "2024-06-20 00:03:42.746949+00:00"
         with patch.object(TimeUtility, "get_current_time", return_value=now):
@@ -87,6 +89,7 @@ class EmployeeSQLiteRepositoryTestCase(unittest.TestCase):
             position="Analyst",
             email=self.employee_email,
             salary=self.employee_salary,
+            country="US",
         )
         self.repository.add(employee)
 
@@ -100,6 +103,7 @@ class EmployeeSQLiteRepositoryTestCase(unittest.TestCase):
             position="Analyst",
             email=self.employee_email,
             salary=self.employee_salary,
+            country="US",
         )
         self.repository.add(employee)
         all_employees = self.repository.get_all()
