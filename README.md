@@ -48,6 +48,7 @@ server/
     ├── database/ # The DB manager, like sessions, different drivers
     ├── exceptions/ # Project custom Exceptions like EmailValidationException, and ImmutableAttributeError
     ├── logging/ # Project logging <logger>
+    ├── notifications/ # Notifications like NotifyByEmail
     ├── utilities/ # Project utilities like TimeUtility
     └── validators/ # Project Validators like EmailValidator
 
