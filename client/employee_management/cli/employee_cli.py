@@ -47,6 +47,8 @@ class EmployeeCLI:
         Retrieve an employee by ID.
 
         :param employee_id: ID of the employee.
+        :return: The Employee dict
+        :raises ValueError: If the employee does not exist.
         """
         employee_id = uuid.UUID(employee_id)
         employee = self.service.get_employee(employee_id=employee_id)
@@ -69,6 +71,7 @@ class EmployeeCLI:
         :param employee_id: ID of the employee to update.
         :param updates: Dictionary of updates to apply to the employee.
         :return: Dictionary of updated employee.
+        :raises ValueError: If the employee does not exist.
         """
         employee = self.service.get_employee(uuid.UUID(employee_id))
         if not employee:
@@ -104,4 +107,4 @@ class EmployeeCLI:
         holidays = self.service.get_employee_current_holiday(uuid.UUID(employee_id))
         if not holidays:
             return []
-        return [self.holidays_model.to_dict(holidays=holidays)]
+        return self.holidays_model.to_dict(holidays=holidays)

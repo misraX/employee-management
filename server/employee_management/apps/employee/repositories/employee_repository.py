@@ -21,7 +21,7 @@ class EmployeeSQLiteRepository(CRUDRepository[Employee]):
             cursor = session.get_cursor()
             cursor.execute("SELECT * FROM employee WHERE employee_id = ?", (str(entity_id),))
             result = cursor.fetchone()
-        return Employee(**result) if result is not None else None
+        return Employee(**result) if result else None
 
     def delete(self, entity_id: uuid.UUID) -> None:
         """
@@ -88,12 +88,12 @@ class EmployeeSQLiteRepository(CRUDRepository[Employee]):
         employee = Employee(**result)
         return employee
 
-    def get_all(self) -> list[T] | None:
+    def get_all(self) -> list[T]:
         with self._db_session as session:
             cursor = session.get_cursor()
             cursor.execute("SELECT * FROM employee")
             result = cursor.fetchall()
-        return [Employee(**result) for result in result] if result is not None else None
+        return [Employee(**result) for result in result]
 
     def __str__(self):
         employees = self.get_all()

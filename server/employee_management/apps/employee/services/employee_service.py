@@ -37,7 +37,7 @@ class EmployeeService:
             raise ValueError("Employee values cannot be empty")
         return self._employee_repository.update(entity_id=employee_id, update=values)
 
-    def get_all_employees(self) -> List[Employee] | None:
+    def get_all_employees(self) -> List[Employee]:
         return self._employee_repository.get_all()
 
     def get_employee_current_holiday(
