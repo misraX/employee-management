@@ -88,13 +88,13 @@ class EmployeeCLI:
         self.service.update_employee(employee_id=uuid.UUID(employee_id), values=update_values)
         return self.employee_model.to_dict(updated_employee)
 
-    def list_employees(self) -> List[Dict[str, str]]:
+    def list_employees(self, offset: int = 0, limit: int = 100) -> List[Dict[str, str]]:
         """
         List all employees.
 
         :return: List of employees.
         """
-        employees = self.service.get_all_employees()
+        employees = self.service.get_all_employees(offset=offset, limit=limit)
         return [self.employee_model.to_dict(employee=employee) for employee in employees]
 
     def get_employee_current_holiday(self, employee_id: str) -> List[Dict[str, str]] | List:

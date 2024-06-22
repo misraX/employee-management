@@ -177,20 +177,70 @@ All the below commands can run inside the docker containers by pre-appending `do
 
 - **List all employees:**
 ```text
-📋 List of employees:
 [
     {
-        "name": "Maysra Gamal",
-        "salary": 11111.0,
+        "name": "Darrell Boyer",
+        "salary": 1675.8,
         "position": "Software Developer",
-        "email": "maysra@gmail.com",
-        "employee_id": "47470cce-f2e7-41ef-b891-4afec06b87f1",
-        "country": "EG",
-        "created_at": "2024-06-20 23:28:16.142435-0400",
-        "updated_at": "2024-06-20 23:28:16.142435-0400"
+        "email": "weberjamie@example.org",
+        "country": "TL",
+        "employee_id": "3fc4e19c-0101-4dae-bd41-ecaa1c0cd6d8",
+        "created_at": "2024-06-19 20:03:42.746949-0400",
+        "updated_at": "2024-06-19 20:03:42.746949-0400"
+    },
+    {
+        "name": "Anthony Calderon",
+        "salary": 288.15646,
+        "position": "Software Developer",
+        "email": "david21@example.org",
+        "country": "PY",
+        "employee_id": "48eedaf8-8aad-41a4-aa69-b7a86781d949",
+        "created_at": "2024-06-19 20:03:42.746949-0400",
+        "updated_at": "2024-06-19 20:03:42.746949-0400"
+    },
+    {
+        "name": "Rodney Foster",
+        "salary": 1034.2,
+        "position": "Software Developer",
+        "email": "ybuck@example.org",
+        "country": "AG",
+        "employee_id": "dea7ba72-4338-447f-a945-d8616015d12a",
+        "created_at": "2024-06-19 20:03:42.746949-0400",
+        "updated_at": "2024-06-19 20:03:42.746949-0400"
+    },
+    {
+        "name": "Gary Cooley",
+        "salary": 1302.3419,
+        "position": "Software Developer",
+        "email": "daniel53@example.net",
+        "country": "BF",
+        "employee_id": "d9049a8e-911d-4710-9ede-6ba94092f127",
+        "created_at": "2024-06-19 20:03:42.746949-0400",
+        "updated_at": "2024-06-19 20:03:42.746949-0400"
+    },
+    {
+        "name": "Lisa Davila",
+        "salary": 1825.7181082,
+        "position": "Software Developer",
+        "email": "westgina@example.com",
+        "country": "MG",
+        "employee_id": "cc8989ee-a547-4270-a96e-d58dcff141ef",
+        "created_at": "2024-06-19 20:03:42.746949-0400",
+        "updated_at": "2024-06-19 20:03:42.746949-0400"
+    },
+    {
+        "name": "Yolanda Johnson",
+        "salary": 1621.79069837,
+        "position": "Software Developer",
+        "email": "johnclarke@example.org",
+        "country": "KG",
+        "employee_id": "764c3208-f01e-4987-a68b-f63ee6b334c6",
+        "created_at": "2024-06-19 20:03:42.746949-0400",
+        "updated_at": "2024-06-19 20:03:42.746949-0400"
     }
 ]
-
+Press enter to continue <enter>, current offset 4000, current count 4239, fetched employees 239.
+Found 4239 employees!
 ```
 
 - **Get an employee by ID**

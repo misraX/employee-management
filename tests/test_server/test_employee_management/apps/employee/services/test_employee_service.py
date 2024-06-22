@@ -103,18 +103,35 @@ class EmployeeServiceTestCase(unittest.TestCase):
         self.assertIsNone(deleted_employee)
 
     def test_list_employees(self):
-        employee = Employee(
-            name=self.employee_name,
-            position="Software Developer",
-            email=self.employee_email,
-            salary=self.employee_salary,
-            country="US",
-        )
-        now = "2024-06-20 00:03:42.746949+00:00"
-        with patch.object(TimeUtility, "get_current_time", return_value=now):
-            self.employee_service.add_employee(employee=employee)
-        list_of_employees = self.employee_service.get_all_employees()
-        self.assertEqual(len(list_of_employees), 1)
+        seeds = [
+            Employee(
+                name=faker.name(),
+                position="Software Developer",
+                email=faker.email(),
+                salary=faker.pyfloat(min_value=100, max_value=2000),
+                country=faker.country_code(),
+                employee_id=uuid.uuid4(),
+            )
+            for _ in range(1000)
+        ]
+
+        for seed in seeds:
+            now = "2024-06-20 00:03:42.746949+00:00"
+            with patch.object(TimeUtility, "get_current_time", return_value=now):
+                self.employee_service.add_employee(employee=seed)
+        offset = 0
+        limit = 100
+        counter = 0
+        list_only_one_employee = self.employee_service.get_all_employees(offset=offset, limit=1)
+        self.assertEqual(len(list_only_one_employee), 1)
+        while True:
+            list_of_employees = self.employee_service.get_all_employees(offset=offset, limit=limit)
+            if not list_of_employees:
+                break
+            counter += list_of_employees.__len__()
+            offset += limit
+
+        self.assertEqual(counter, seeds.__len__())
 
 
 if __name__ == "__main__":
