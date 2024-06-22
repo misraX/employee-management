@@ -1,9 +1,9 @@
 from datetime import date
-from typing import List
+from typing import Dict, List
 
 
 class HolidaysModel:
-    def to_dict(self, holidays: List[tuple[date, str]] | None):
+    def to_dict(self, holidays: List[tuple[date, str]] | None) -> Dict:
         holidays_dict = {}
         for holiday in holidays:
             holidays_dict["date"] = str(holiday[0])

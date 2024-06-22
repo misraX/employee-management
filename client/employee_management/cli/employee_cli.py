@@ -1,5 +1,4 @@
 import uuid
-from datetime import date
 from typing import Dict, List
 
 from client.employee_management.models.employee_model import EmployeeModel
@@ -95,7 +94,7 @@ class EmployeeCLI:
         employees = self.service.get_all_employees()
         return [self.employee_model.to_dict(employee=employee) for employee in employees]
 
-    def get_employee_current_holiday(self, employee_id: str) -> list[tuple[date, str]] | None:
+    def get_employee_current_holiday(self, employee_id: str) -> List[Dict[str, str]] | List:
         """
         Get current holiday for an employee.
 
@@ -103,4 +102,6 @@ class EmployeeCLI:
         :return: list of holidays or None
         """
         holidays = self.service.get_employee_current_holiday(uuid.UUID(employee_id))
-        return self.holidays_model.to_dict(holidays=holidays)
+        if not holidays:
+            return []
+        return [self.holidays_model.to_dict(holidays=holidays)]
