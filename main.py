@@ -110,9 +110,25 @@ def get_current_employee_holiday(employee_id):
 @cli.command()
 def list():
     """List all employees 📋"""
-    employees = employee_cli.list_employees()
-    click.echo("📋 List of employees:")
-    click.echo(json.dumps(employees, indent=4))
+    offset = 0
+    limit = 1000
+    counter = 0
+    while True:
+        employees = employee_cli.list_employees(offset=offset, limit=limit)
+        if not employees:
+            break
+        click.echo(json.dumps(employees, indent=4))
+        employees_length = len(employees)
+        counter += employees_length
+        input(
+            f"Press enter to continue <enter>, "
+            f"current offset {offset}, "
+            f"current count {counter}, "
+            f"fetched employees {employees_length}."
+        )
+        offset += limit
+
+    click.echo(f"Found {counter} employees!")
 
 
 if __name__ == "__main__":

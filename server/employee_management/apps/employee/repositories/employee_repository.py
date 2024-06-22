@@ -1,7 +1,7 @@
 import uuid
 
 from server.employee_management.apps.employee.models.employee import Employee
-from server.employee_management.core.repositories.base_repository import CRUDRepository, T
+from server.employee_management.core.repositories.base_repository import CRUDRepository
 from server.employee_management.database.sqlite_database_session import SQLiteDatabaseSession
 from server.employee_management.utilities.time import TimeUtility
 
@@ -88,10 +88,17 @@ class EmployeeSQLiteRepository(CRUDRepository[Employee]):
         employee = Employee(**result)
         return employee
 
-    def get_all(self) -> list[T]:
+    def get_all(self, offset: int = 0, limit: int = 100) -> list[Employee]:
+        """
+        Get all employee with offset and limit.
+
+        :param offset: int default 0
+        :param limit: int default 100
+        :return: list of employees
+        """
         with self._db_session as session:
             cursor = session.get_cursor()
-            cursor.execute("SELECT * FROM employee")
+            cursor.execute("SELECT * FROM employee LIMIT ? OFFSET ?", (limit, offset))
             result = cursor.fetchall()
         return [Employee(**result) for result in result]
 
