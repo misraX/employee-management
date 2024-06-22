@@ -1,11 +1,11 @@
 from datetime import date
-from typing import List
+from typing import Any, List
 
 
 class HolidaysModel:
-    def to_dict(self, holidays: List[tuple[date, str]] | None):
-        holidays_dict = {}
+    def to_dict(self, holidays: List[tuple[date, str]] | None) -> list[dict[str, str | Any]]:
+        holidays_list = []
         for holiday in holidays:
-            holidays_dict["date"] = str(holiday[0])
-            holidays_dict["holiday"] = holiday[1]
-        return holidays_dict
+            holidays_dict = {"date": str(holiday[0]), "holiday": holiday[1]}
+            holidays_list.append(holidays_dict)
+        return holidays_list

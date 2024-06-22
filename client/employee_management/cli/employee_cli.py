@@ -1,5 +1,4 @@
 import uuid
-from datetime import date
 from typing import Dict, List
 
 from client.employee_management.models.employee_model import EmployeeModel
@@ -48,6 +47,8 @@ class EmployeeCLI:
         Retrieve an employee by ID.
 
         :param employee_id: ID of the employee.
+        :return: The Employee dict
+        :raises ValueError: If the employee does not exist.
         """
         employee_id = uuid.UUID(employee_id)
         employee = self.service.get_employee(employee_id=employee_id)
@@ -70,6 +71,7 @@ class EmployeeCLI:
         :param employee_id: ID of the employee to update.
         :param updates: Dictionary of updates to apply to the employee.
         :return: Dictionary of updated employee.
+        :raises ValueError: If the employee does not exist.
         """
         employee = self.service.get_employee(uuid.UUID(employee_id))
         if not employee:
@@ -95,7 +97,7 @@ class EmployeeCLI:
         employees = self.service.get_all_employees()
         return [self.employee_model.to_dict(employee=employee) for employee in employees]
 
-    def get_employee_current_holiday(self, employee_id: str) -> list[tuple[date, str]] | None:
+    def get_employee_current_holiday(self, employee_id: str) -> List[Dict[str, str]] | List:
         """
         Get current holiday for an employee.
 
@@ -103,4 +105,6 @@ class EmployeeCLI:
         :return: list of holidays or None
         """
         holidays = self.service.get_employee_current_holiday(uuid.UUID(employee_id))
+        if not holidays:
+            return []
         return self.holidays_model.to_dict(holidays=holidays)
