@@ -211,8 +211,8 @@ All the below commands can run inside the docker containers by pre-appending `do
 - **Get current employee's holidays:**
 ```text
 🍹 List of employee's current week holidays
-{
+[{
     "date": "2024-06-18",
     "holiday": "Eid al-Adha Holiday (estimated)"
-}
+}]
 ```
