@@ -37,7 +37,7 @@ def employee_upcoming_holidays():
                 if holidays:
                     message = "Your upcoming public holidays are as follows:"
                     for holiday in holidays:
-                        message += f"\nDate: {holiday[0]} - Holiday: - {holiday[1]}"
+                        message += f"\nDate: {holiday[0]} - Holiday: {holiday[1]}"
                     email = NotifyByEmail(
                         message=message,
                         to_email=employee.email,
