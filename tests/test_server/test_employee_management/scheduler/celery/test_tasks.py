@@ -17,7 +17,6 @@ class EmployeeUpcomingHolidaysTaskTestCase(unittest.TestCase):
         mock_holidays_backend,
         mock_employee_service,
     ):
-        # Arrange
         mock_employee_service_instance = mock_employee_service.return_value
         mock_holidays_backend_instance = mock_holidays_backend.return_value
         mock_employee_repository_instance = mock_employee_repository.return_value
@@ -25,7 +24,6 @@ class EmployeeUpcomingHolidaysTaskTestCase(unittest.TestCase):
         employee_1_id = uuid.uuid4()
         employee_2_id = uuid.uuid4()
 
-        # Mimic the behavior of get_all with pagination
         mock_employee_repository_instance.get_all.side_effect = [
             [
                 MagicMock(employee_id=employee_1_id, email="test1@example.com", country="EG"),
@@ -39,7 +37,6 @@ class EmployeeUpcomingHolidaysTaskTestCase(unittest.TestCase):
             ("2024-01-07", "Coptic Christmas"),
         ]
 
-        # Ensure the service uses the mocked repository
         mock_employee_service_instance.get_all_employees.side_effect = (
             lambda offset, limit: mock_employee_repository_instance.get_all(offset, limit)
         )
