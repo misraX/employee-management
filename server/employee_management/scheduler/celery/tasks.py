@@ -23,10 +23,14 @@ def employee_upcoming_holidays():
     employee_service = EmployeeService(
         employee_repository=employee_repository, holidays_backend=holidays_backend
     )
-    all_employees = employee_service.get_all_employees()
-    if all_employees:
+    offset = 0
+    limit = 100
+    while True:
+        all_employees = employee_service.get_all_employees(offset=offset, limit=limit)
+        if not all_employees:
+            break
         for employee in all_employees:
-            if employee.country:
+            try:
                 holidays = holidays_backend.get_upcoming_holidays(
                     country=employee.country, categories=(PUBLIC,)
                 )
@@ -44,7 +48,10 @@ def employee_upcoming_holidays():
                         smtp_user=configuration.smtp_user,
                         smtp_password=configuration.smtp_password,
                     )
-                    email.send()
+                    email.send()  # Email exceptions already handled internally
+            except Exception as e:
+                logger.warning(f"Exception raised while getting upcoming holidays: {e}")
+        offset += limit
 
 
 @app.task
