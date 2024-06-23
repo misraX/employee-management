@@ -69,3 +69,19 @@ class NotifyByEmail(Notify):
             logging.info("Email sent successfully.")
         except Exception as e:
             logging.warning(f"Failed to send email: {e}")
+
+
+if __name__ == "__main__":
+    message = "This is a test notification."
+    to_email = "maysragamal@gmail.com"
+    from_email = config.smtp_user
+    subject = "Test Notification"
+    smtp_server = config.smtp_server
+    smtp_port = config.smtp_port
+    smtp_user = config.smtp_user
+    smtp_password = config.smtp_password
+
+    notifier = NotifyByEmail(
+        message, to_email, from_email, subject, smtp_server, smtp_port, smtp_user, smtp_password
+    )
+    notifier.send()
