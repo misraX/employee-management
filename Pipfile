@@ -1,0 +1,34 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+faker = "*"
+email-validator = "*"
+python-dotenv = "*"
+pytz = "*"
+click = "*"
+holidays = "*"
+celery = "*"
+redis = "*"
+
+[dev-packages]
+conventional-pre-commit = "*"
+coverage = "*"
+ipython = "*"
+flake8-bugbear = "*"
+pre-commit = "*"
+flake8-tidy-imports = "*"
+isort = "*"
+flake8-print = "*"
+flake8-no-pep420 = "*"
+flake8-quotes = "*"
+flake8-simplify = "*"
+pycodestyle = "*"
+pyflakes = "*"
+ruff = "*"
+requests = "*"
+
+[requires]
+python_version = "3.12"

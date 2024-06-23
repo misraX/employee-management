@@ -1,0 +1,17 @@
+target-version = "py312"
+line-length = 100
+
+[lint]
+select = [
+
+    "T20", # flake8-print
+    "INP", # flake8-no-pep420
+    "Q", # flake8-quotes
+    "I", # isort
+    "B", # flake8-bugbear
+    "SIM", # flake8-simplify
+    "E", # pycodestyle
+    "W", # pycodestyle
+    "F", # Pyflakes
+
+]
